@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors */
+  --color-primary: #08A5EA;
+  --color-secondary: #000E14;
+  --color-dark: #000E14;
+  --color-grey: #5E5A52;
+  
+
+  /* Font Sizes */
+  --text-custom12: 12px;
+  --text-custom14: 14px;
+  --text-custom16: 16px;
+  --text-custom18: 18px;
+  --text-custom20: 20px;
+  --text-custom24: 24px;
+  --text-custom30: 30px;
+  --text-custom36: 36px;
+  --text-custom48: 48px;
+  --text-custom60: 60px;
+
+  /* Breakpoints */
+  --breakpoint-sm: 540px;
+  --breakpoint-md: 767px;
+  --breakpoint-lg: 990px;
+  --breakpoint-xl: 1240px;
+  --breakpoint-2xl: 1440px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 15px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.hero-fade-up {
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.hero-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.hero-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.hero-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.hero-delay-4 {
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-up {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}
+
+@keyframes clientsMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: clientsMarquee 22s linear infinite;
+}
+
+.clients-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 70px;
+  padding-inline: 35px;
+}
+
+@keyframes clientsMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.clients-track:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 767px) {
+  .clients-group {
+    gap: 40px;
+    padding-inline: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-track {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee {
+    animation: none;
+    transform: none;
+  }
 }

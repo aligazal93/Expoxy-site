@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "contact": "Contact Us"
+  },
+
+  "hero": {
+    "title": "Professional Epoxy Flooring Solutions",
+    "description": "We provide professional epoxy flooring solutions for residential, commercial and industrial projects.",
+    "button": "Request a Quote"
+  }
+}
