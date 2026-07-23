@@ -108,7 +108,7 @@ function ServiceCard({ service }) {
                     width={800}
                     height={600}
                     sizes="(max-width: 539px) 100vw, (max-width: 766px) 45vw, (max-width: 989px) 34vw, 25vw"
-                    className="h-auto w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:h-full"
+                    className="lg:h-[400px] h-[300px] w-full object-fill transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] "
                 />
             </Link>
 

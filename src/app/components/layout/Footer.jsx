@@ -14,6 +14,7 @@ import {
     LuMail,
     LuMapPin,
 } from "react-icons/lu";
+import FloatingActions from "./FloatingButton";
 
 const mainLinks = [
     { id: 1, title: "الرئيسية", href: "/" },
@@ -202,9 +203,12 @@ export default function Footer() {
                     </p>
 
                     <p>
-                       تصميم وتطوير: شركة الأولى الحديثة للدعاية والإعلان المحدودة
+                        تصميم وتطوير: شركة الأولى الحديثة للدعاية والإعلان المحدودة
                     </p>
                 </div>
+
+                <FloatingActions />
+
             </div>
         </footer>
     );
