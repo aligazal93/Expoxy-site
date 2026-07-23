@@ -16,8 +16,8 @@ export async function generateMetadata({ params }) {
 
     return {
         title: isArabic
-            ? "حلول أرضيات الإيبوكسي"
-            : "Epoxy Flooring Solutions",
+            ? "الأولي للايبوكسي"
+            : "Aloula Expoxy",
 
         description: isArabic
             ? "حلول احترافية لأرضيات الإيبوكسي للمشاريع السكنية والتجارية والصناعية."

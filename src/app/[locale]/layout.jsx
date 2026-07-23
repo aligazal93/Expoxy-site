@@ -4,7 +4,6 @@ import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
-import FloatingActions from "../components/layout/FloatingButton";
 
 const ibm = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
