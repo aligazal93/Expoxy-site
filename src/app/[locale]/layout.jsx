@@ -2,6 +2,8 @@ import "../globals.css";
 
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 const ibm = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
@@ -33,7 +35,13 @@ export default async function LocaleLayout({ children, params }) {
       dir={isArabic ? "rtl" : "ltr"}
       className={ibm.variable}
     >
-      <body className={ibm.className}>{children}</body>
+      <body className={ibm.className}>
+        <Header locale={locale} />
+        {children}
+
+        <Footer locale={locale} />
+        
+        </body>
     </html>
   );
 }

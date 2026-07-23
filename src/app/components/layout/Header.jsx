@@ -91,19 +91,19 @@ export default function Header({ locale }) {
                   <div className="h-2" />
 
                   <div className="overflow-hidden rounded-[16px] border border-black/[0.06] bg-white p-2 shadow-[0_20px_50px_rgba(0,0,0,0.10)]">
-                    <DropdownLink href={`/${locale}/services/epoxy-flooring`}>
+                    <DropdownLink href={`/${locale}`}>
                       أرضيات الإيبوكسي
                     </DropdownLink>
 
-                    <DropdownLink href={`/${locale}/services/3d-flooring`}>
+                    <DropdownLink href={`/${locale}`}>
                       أرضيات 3D
                     </DropdownLink>
 
-                    <DropdownLink href={`/${locale}/services/metallic-epoxy`}>
+                    <DropdownLink href={`/${locale}`}>
                       الإيبوكسي الميتالك
                     </DropdownLink>
 
-                    <DropdownLink href={`/${locale}/services/industrial-epoxy`}>
+                    <DropdownLink href={`/${locale}`}>
                       الإيبوكسي الصناعي
                     </DropdownLink>
                   </div>
@@ -111,19 +111,19 @@ export default function Header({ locale }) {
               </li>
 
               <li>
-                <NavLink href={`/${locale}/works`}>أعمالنا</NavLink>
+                <NavLink href={`/${locale}/`}>أعمالنا</NavLink>
               </li>
 
               <li>
-                <NavLink href={`/${locale}/#how-we-work`}>كيف نعمل</NavLink>
+                <NavLink href={`/${locale}/`}>كيف نعمل</NavLink>
               </li>
 
               <li>
-                <NavLink href={`/${locale}/#faq`}>الأسئلة الشائعة</NavLink>
+                <NavLink href={`/${locale}/`}>الأسئلة الشائعة</NavLink>
               </li>
 
               <li>
-                <NavLink href={`/${locale}/floor-design`}>اطلب تصميم أرضيتك</NavLink>
+                <NavLink href={`/${locale}`}>اطلب تصميم أرضيتك</NavLink>
               </li>
 
             </ul>
@@ -134,7 +134,7 @@ export default function Header({ locale }) {
             <ChangeLanguage />
 
             <Link
-              href={`/${locale}/contact`}
+              href={`/${locale}`}
               className="rounded-[12px] bg-primary px-4 py-3 text-custom14 font-[600] text-white transition-colors duration-300 hover:bg-secondary"
             >
               تواصل معنا الآن
@@ -229,19 +229,19 @@ export default function Header({ locale }) {
                 <div className="min-h-0">
                   <div className="mr-4 py-2 ">
 
-                    <MobileSubLink href={`/${locale}/services/epoxy-flooring`} onClick={closeMenu}>
+                    <MobileSubLink href={`/${locale}`} onClick={closeMenu}>
                       أرضيات الإيبوكسي
                     </MobileSubLink>
 
-                    <MobileSubLink href={`/${locale}/services/3d-flooring`} onClick={closeMenu}>
+                    <MobileSubLink href={`/${locale}`} onClick={closeMenu}>
                       أرضيات 3D
                     </MobileSubLink>
 
-                    <MobileSubLink href={`/${locale}/services/metallic-epoxy`} onClick={closeMenu}>
+                    <MobileSubLink href={`/${locale}`} onClick={closeMenu}>
                       الإيبوكسي الميتالك
                     </MobileSubLink>
 
-                    <MobileSubLink href={`/${locale}/services/industrial-epoxy`} onClick={closeMenu}>
+                    <MobileSubLink href={`/${locale}`} onClick={closeMenu}>
                       الإيبوكسي الصناعي
                     </MobileSubLink>
 
@@ -251,25 +251,25 @@ export default function Header({ locale }) {
             </li>
 
             <li>
-              <MobileLink href={`/${locale}/works`} onClick={closeMenu}>
+              <MobileLink href={`/${locale}/`} onClick={closeMenu}>
                 أعمالنا
               </MobileLink>
             </li>
 
             <li>
-              <MobileLink href={`/${locale}/#how-we-work`} onClick={closeMenu}>
+              <MobileLink href={`/${locale}/`} onClick={closeMenu}>
                 كيف نعمل
               </MobileLink>
             </li>
 
             <li>
-              <MobileLink href={`/${locale}/#faq`} onClick={closeMenu}>
+              <MobileLink href={`/${locale}/`} onClick={closeMenu}>
                 الأسئلة الشائعة
               </MobileLink>
             </li>
 
             <li>
-              <MobileLink href={`/${locale}/floor-design`} onClick={closeMenu}>
+              <MobileLink href={`/${locale}`} onClick={closeMenu}>
                 اطلب تصميم أرضيتك
               </MobileLink>
             </li>
@@ -280,7 +280,7 @@ export default function Header({ locale }) {
         {/* SideNav Footer */}
         <div className="border-t border-black/5 p-5">
           <Link
-            href={`/${locale}/contact`}
+            href={`/${locale}`}
             onClick={closeMenu}
             className="flex w-full items-center justify-center rounded-[12px] bg-primary px-5 py-4 font-[700] text-white transition-colors duration-300 hover:bg-secondary"
           >

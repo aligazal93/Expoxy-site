@@ -41,22 +41,20 @@ export default function Intro({ locale = "ar" }) {
             والمحلات والمشاريع التجارية، مع إعداد تصور بصري للمكان قبل التنفيذ.
           </p>
 
-          {/* Types */}
           <p className="hero-fade-up hero-delay-4 mx-auto mt-5 text-[14px] font-[700] leading-relaxed text-white">
             إيبوكسي 3D رخامي • ميتاليك • حلول تجارية وصناعية
           </p>
 
-          {/* Actions */}
           <div className="hero-fade-up hero-delay-5 mt-7 flex items-center justify-center gap-3">
             <Link
-              href={`/${locale}/design-your-floor`}
+              href={`/${locale}`}
               className="inline-flex min-h-[48px] min-w-[190px] items-center justify-center rounded-full border border-white/70 px-7 text-[14px] font-[600] text-white transition-all duration-300 ease-out hover:border-white hover:bg-white hover:text-secondary hover:shadow-[0_12px_30px_rgba(0,0,0,0.16)]"
             >
               اطلب تصور أرضيتك الآن
             </Link>
 
             <Link
-              href={`/${locale}/request-design`}
+              href={`/${locale}`}
               className="inline-flex min-h-[48px] min-w-[190px] items-center justify-center rounded-full bg-primary px-7 text-[14px] font-[700] text-white transition-all duration-300 ease-out hover:brightness-105 hover:shadow-[0_14px_35px_rgba(0,166,232,0.30)]"
             >
               تصفح التصاميم

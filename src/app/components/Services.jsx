@@ -6,42 +6,42 @@ const services = [
     id: 1,
     title: "أرضيات إيبوكسي ثلاثية الأبعاد",
     description: "تصاميم واقعية بأعماق بصرية مذهلة تحول الأرضية إلى لوحة فنية.",
-    image: "/images/s-1.png",
+    image: "/images/pic-1.png",
     href: "/services/3d-epoxy",
   },
   {
     id: 2,
     title: "إيبوكسي رخامي وميتاليك",
     description: "تدرجات معدنية وعروق رخامية تمنح المكان طابعًا فاخرًا معاصرًا.",
-    image: "/images/s-2.png",
+    image: "/images/proj-1.png",
     href: "/services/metallic-epoxy",
   },
   {
     id: 3,
     title: "إيبوكسي المنازل والفلل",
     description: "حلول متكاملة لأرضيات المنازل مع تشطيبات ناعمة ومتينة.",
-    image: "/images/s-3.png",
+    image: "/images/proj-2.png",
     href: "/services/home-epoxy",
   },
   {
     id: 4,
     title: "إيبوكسي المكاتب والمحلات",
     description: "أرضيات عملية أنيقة تتحمل طبيعة الاستخدام اليومية للمساحات التجارية.",
-    image: "/images/s-1.png",
+    image: "/images/pic-1.png",
     href: "/services/commercial-epoxy",
   },
   {
     id: 5,
     title: "إيبوكسي المطاعم والكافيهات",
     description: "أرضيات مقاومة وسهلة التنظيف بتصميمات فاخرة.",
-    image: "/images/s-2.png",
+    image: "/images/proj-3.png",
     href: "/services/restaurants-epoxy",
   },
   {
     id: 6,
     title: "الإيبوكسي الصناعي",
     description: "حلول قوية للمصانع والمخازن والجراجات والمساحات الصناعية.",
-    image: "/images/s-3.png",
+    image: "/images/proj-2.png",
     href: "/services/industrial-epoxy",
   },
 ];
@@ -49,7 +49,7 @@ const services = [
 export default function Services({ locale = "ar" }) {
   const localizedServices = services.map((service) => ({
     ...service,
-    href: `/${locale}${service.href}`,
+    href: `/`,
   }));
 
   return (
