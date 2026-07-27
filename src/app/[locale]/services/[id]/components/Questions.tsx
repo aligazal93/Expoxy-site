@@ -42,9 +42,10 @@ const defaultFaqs = [
     },
 ];
 
-export default function FaqSection({
+export default function Questions({
     faqs = defaultFaqs,
-}) {
+    locale,
+}: { faqs?: any[], locale?: string }) {
     const [openIndex, setOpenIndex] = useState(0);
 
     const handleToggle = (index) => {
@@ -52,32 +53,8 @@ export default function FaqSection({
     };
 
     return (
-        <section className="container py-[70px] md:py-[90px] lg:py-[110px]" aria-labelledby="faq-heading">
-            <div className="grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
-
-                {/* Content */}
-                <div className="text-start lg:pt-3">
-                    <span className="mb-6 block text-[13px] font-medium text-[#96908A]">
-                        أسئلة شائعة
-                    </span>
-
-                    <h2 id="faq-heading" className="mb-5 text-[30px] font-bold leading-[1.4] text-[#102027] md:text-[38px] lg:text-[44px]">
-                        كل ما تحتاج معرفته
-                    </h2>
-
-                    <p className="mb-7 max-w-[490px] text-[14px] leading-[2] text-[#77736F] md:text-[15px]">
-                        جمعنا لك أكثر الأسئلة تكرارًا. إن لم تجد إجابتك، تواصل معنا مباشرة.
-                    </p>
-
-                    <Link href="" className="inline-flex min-h-[44px] items-center mx-1 justify-center rounded-full border border-[#05AEEF] px-6 text-[14px] font-medium text-[#05AEEF] transition-all duration-300 hover:bg-[#05AEEF] hover:text-white">
-                        اسألنا عبر الواتساب
-                    </Link>
-
-                    <a href="/images/epoxy.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center mx-1 justify-center rounded-full border border-[#05AEEF] px-6 text-[14px] font-medium text-[#05AEEF] transition-all duration-300 hover:bg-[#05AEEF] hover:text-white">
-                        تحميل ملف الشركة
-                    </a>
-                </div>
-
+        <section className="container py-[70px] md:py-[90px] lg:py-[20px]" aria-labelledby="faq-heading">
+            <div className="grid items-start gap-1">
                 {/* Accordion */}
                 <div className="">
                     {faqs.map((faq, index) => {

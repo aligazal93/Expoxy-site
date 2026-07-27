@@ -4,7 +4,7 @@ import { saveLang } from "@/utils/lang";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
-export default function ChangeLanguage() {
+export default function ChangeLanguage({ locale }: { locale?: string }) {
   const pathname = usePathname();
   const router = useRouter();
 

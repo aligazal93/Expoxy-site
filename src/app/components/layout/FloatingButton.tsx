@@ -1,7 +1,7 @@
 import { FaWhatsapp } from "react-icons/fa6";
 import { LuPhone } from "react-icons/lu";
 
-export default function FloatingActions() {
+export default function FloatingButton({ locale }: { locale?: string }) {
     return (
         <div className="fixed bottom-[20px] left-[15px] z-[999] flex flex-col items-end gap-3 sm:bottom-[25px] sm:right-[25px]">
 

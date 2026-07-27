@@ -15,13 +15,13 @@ const clients = [
   {
     id: 3,
     name: "اسم العميل الثالث",
-     logo: "/images/b-1.png",
+    logo: "/images/b-1.png",
 
   },
 
 ];
 
-export default function ClientsSlider() {
+export default function ClientsSlider({ locale }: { locale?: string }) {
   return (
     <section className="overflow-hidden border-b border-black/[0.05] bg-white py-7" aria-labelledby="trusted-clients-title">
       <div className="container flex items-center gap-8 lg:gap-[60px]">
@@ -52,7 +52,7 @@ export default function ClientsSlider() {
   );
 }
 
-function ClientsGroup({ clients, duplicate = false }) {
+function ClientsGroup({ clients, duplicate = false }: { clients: any[], duplicate?: boolean }) {
   return (
     <div className="clients-group" aria-hidden={duplicate ? "true" : undefined}>
       {clients.map((client) => (
@@ -63,7 +63,7 @@ function ClientsGroup({ clients, duplicate = false }) {
             width={150}
             height={55}
             loading="lazy"
-            className="max-h-[55px] w-auto max-w-[150px] object-contain grayscale opacity-60 transition-[filter,opacity] duration-300 hover:grayscale-0 hover:opacity-100"
+            className="h-auto max-h-[55px] w-auto max-w-[150px] object-contain grayscale opacity-60 transition-[filter,opacity] duration-300 hover:grayscale-0 hover:opacity-100"
           />
         </div>
       ))}

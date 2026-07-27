@@ -19,7 +19,7 @@ const epoxyImages = [
 
 ];
 
-export default function WhyEpoxy() {
+export default function WhyEpoxy({ locale }: { locale?: string }) {
     return (
         <section
             className="relative overflow-hidden bg-white py-[100px]  "

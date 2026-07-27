@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,12 +10,8 @@ import {
     FaXTwitter,
 } from "react-icons/fa6";
 
-import {
-    LuPhone,
-    LuMail,
-    LuMapPin,
-} from "react-icons/lu";
 import FloatingActions from "./FloatingButton";
+import { usePathname } from "next/navigation";
 
 const mainLinks = [
     { id: 1, title: "الرئيسية", href: "/" },
@@ -57,41 +54,80 @@ const socialLinks = [
     },
 ];
 
-export default function Footer() {
+type FooterProps = {
+    locale: string;
+};
+
+export default function Footer({ locale }: FooterProps) {
     const currentYear = new Date().getFullYear();
+    const pathname = usePathname();
+
+    const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
 
     return (
-        <footer className="relative mt-[120px] bg-[#002433] rounded-t-[75px] text-white">
+        <footer className={`relative ${isHome ? "mt-[120px]" : "mt-[0px]"} bg-[#002433]  text-white ${isHome ? "rounded-t-[75px]" : "rounded-t-[0px]"}`}>
 
-            <div className="container relative">
-                <div className="absolute left-1/2 top-0 z-10 w-[calc(100%-30px)] max-w-[1080px] -translate-x-1/2 -translate-y-1/2 rounded-[24px] bg-[#09A9E8] px-5 py-8 text-center shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:px-8 md:py-10 lg:px-12 lg:py-9">
-                    <h2 className="mb-3 text-[24px] font-bold leading-[1.5] text-white md:text-[32px] lg:text-[36px]">
-                        جاهز لتحويل أرضيتك إلى قطعة فنية؟
-                    </h2>
+            {/* banner */}
+            {isHome ? (
+                <div className="container relative">
+                    <div className="absolute left-1/2 top-0 z-10 w-[calc(100%-30px)] max-w-[1080px] -translate-x-1/2 -translate-y-1/2 rounded-[24px] bg-[#09A9E8] px-5 py-8 text-center shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:px-8 md:py-10 lg:px-12 lg:py-9">
+                        <h2 className="mb-3 text-[24px] font-bold leading-[1.5] text-white md:text-[32px] lg:text-[36px]">
+                            جاهز لتحويل أرضيتك إلى قطعة فنية؟
+                        </h2>
 
-                    <p className="mx-auto mb-6 max-w-[720px] text-[13px] leading-[2] text-white/80 md:text-[14px]">
-                        أرسل صورة مساحتك الآن، وسنساعدك في اختيار التصميم المناسب وتجهيز تصور مبدئي يناسب ذوقك ومكانك.
-                    </p>
+                        <p className="mx-auto mb-6 max-w-[720px] text-[13px] leading-[2] text-white/80 md:text-[14px]">
+                            أرسل صورة مساحتك الآن، وسنساعدك في اختيار التصميم المناسب وتجهيز تصور مبدئي يناسب ذوقك ومكانك.
+                        </p>
 
-                    <div className="flex flex-wrap items-center justify-center gap-3">
-                        <a href="https://wa.me/966000000000" target="_blank" rel="noopener noreferrer" className="group inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
-                            تواصل عبر واتساب
+                        <div className="flex flex-wrap items-center justify-center gap-3">
+                            <a href="https://wa.me/966000000000" target="_blank" rel="noopener noreferrer" className="group inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
+                                تواصل عبر واتساب
 
-                            <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
-                        </a>
-                        <Link href="/request-design" className="group inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
-                            اطلب تصميم أرضيتك
+                                <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
+                            </a>
+                            <Link href="/request-design" className="group inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
+                                اطلب تصميم أرضيتك
 
-                            <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
-                        </Link>
+                                <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
+                            </Link>
 
 
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : <div className="container">
+                <div className="pt-12 block  lg:flex items-center justify-between">
+                    <div>
+                        <h2 className="mb-2  text-[24px] font-bold leading-[1.5] text-white md:text-[32px] lg:text-[36px]">
+                            جاهز لتحويل أرضيتك إلى قطعة فنية؟
+                        </h2>
+
+                        <p className="mx-auto mb-6 max-w-[720px] text-[13px] leading-[2] text-white/80 md:text-[14px]">
+                            أرسل صورة مساحتك الآن، وسنساعدك في اختيار التصميم المناسب وتجهيز تصور مبدئي يناسب ذوقك ومكانك.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="block lg:flex flex-wrap items-center justify-center gap-8">
+                            <a href="https://wa.me/966000000000" target="_blank" rel="noopener noreferrer" className="group  inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
+                                تواصل عبر واتساب
+
+                                <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
+                            </a>
+                            <Link href="/request-design" className="group inline-flex min-h-[44px] items-center justify-center mx-2 gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
+                                اطلب تصميم أرضيتك
+
+                                <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
+                            </Link>
+                        </div>
+                    </div>
+
+                </div>
+            </div>}
+
+            {isHome ? null : <hr className="my-10 border border-primary" />}
 
             {/* Footer Content */}
-            <div className="container pb-6 pt-[190px] sm:pt-[180px] md:pt-[170px] lg:pt-[165px]">
+            <div className={`container pb-6 ${isHome ? "pt-[140px]" : "pt-[20px]"}`}>
                 <div className="grid gap-10 border-b border-white/10 pb-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_1fr] lg:gap-12">
                     {/* About */}
                     <div>

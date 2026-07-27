@@ -1,3 +1,6 @@
+"use client";
+import { usePathname } from "next/navigation";
+
 const defaultSteps = [
   {
     id: 1,
@@ -26,10 +29,13 @@ export default function ProcessSection({
   locale = "ar",
 }) {
   const isArabic = locale === "ar";
+  const pathname = usePathname();
+
+  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
 
   return (
     <section
-      className="relative overflow-hidden bg-[#003342] py-[70px] md:py-[90px] lg:py-[110px]"
+      className={`relative overflow-hidden ${isHome ? "bg-[#003342]" : "bg-white"} py-[70px] md:py-[90px] lg:py-[110px]`}
       dir={isArabic ? "rtl" : "ltr"}
       aria-labelledby="process-title"
       style={{
@@ -44,14 +50,12 @@ export default function ProcessSection({
       <div className="container relative z-10">
         {/* Heading */}
         <header className="mx-auto mb-[55px] max-w-[850px] text-center lg:mb-[75px]">
-          <span className="mb-5 inline-flex rounded-full border border-white/50 px-4 py-[6px] text-[13px] font-medium text-white/80">
-            {isArabic ? "كيف تعمل؟" : "How it works?"}
+          <span className={`mb-5 inline-flex rounded-full ${isHome ? "border-white/50" : "border-[#70707070]"} px-4 py-[6px] border  px-4 py-[6px] text-[13px] font-medium ${isHome ? "text-white" : "text-[#70707070]"}`}>
+            كيف تعمل؟
           </span>
 
-          <h2 id="process-title" className="text-[28px] font-bold leading-[1.5] text-white md:text-[36px] lg:text-[42px]">
-            {isArabic
-              ? "من الفكرة إلى أرضية أحلامك في خطوات بسيطة"
-              : "From an idea to your dream floor in simple steps"}
+          <h2 id="process-title" className={`text-[28px] font-bold leading-[1.5] ${isHome ? "text-white" : "text-dark"} md:text-[36px] lg:text-[42px]`}>
+             من الفكرة إلى أرضية أحلامك في خطوات بسيطة
           </h2>
         </header>
 

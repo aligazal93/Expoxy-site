@@ -1,29 +1,12 @@
-import Link from "next/link";
-import Header from "../components/layout/Header";
 import Intro from "../components/Intro";
 import BrandsSlider from "../components/Brands";
 import WhyEpoxy from "../components/WhyEpoxy";
 import Services from "../components/Services";
-import DesignCatalogSection from "../components/DesignCatalogSection";
 import ProjectsSlider from "../components/ProjectsSlider";
 import ProcessSection from "../components/ProcessSection";
 import FaqSection from "../components/Faqs";
-
-export async function generateMetadata({ params }) {
-    const { locale } = await params;
-
-    const isArabic = locale === "ar";
-
-    return {
-        title: isArabic
-            ? "الأولي للايبوكسي"
-            : "Aloula Expoxy",
-
-        description: isArabic
-            ? "حلول احترافية لأرضيات الإيبوكسي للمشاريع السكنية والتجارية والصناعية."
-            : "Professional epoxy flooring solutions for residential, commercial and industrial projects.",
-    };
-}
+import { getHomeData } from "../services/home";
+import WhyEpoxyHome from "@/components/home/WhyEpoxy";
 
 const projects = [
   {
@@ -68,15 +51,15 @@ const projects = [
   },
 ];
 
-export default async function HomePage({ params }) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
+    const data = await getHomeData(locale);
     return (
         <>
             <Intro locale={locale} />
-            <BrandsSlider locale={locale} />
+            <BrandsSlider  locale={locale} />
             <WhyEpoxy locale={locale} />
-            <Services locale={locale} />
-            <DesignCatalogSection locale={locale} />
+            <Services services={data.services} locale={locale}  />
             <ProjectsSlider
                 projects={projects}
                 locale={locale}

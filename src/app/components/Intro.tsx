@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Intro({ locale = "ar" }) {
+export default function Intro({ locale = "ar" }: { locale?: string }) {
   return (
     <section
       className="relative isolate flex items-center justify-center overflow-hidden lg:min-h-[calc(100svh-90px)]"
