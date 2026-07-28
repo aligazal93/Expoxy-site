@@ -114,19 +114,13 @@ export default function Header({ locale, services }: HeaderProps) {
                             </li>
 
                             <li>
-                                <NavLink href={`/${locale}/`}>
+                                <NavLink href={`/${locale}/projects`}>
                                     أعمالنا
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink href={`/${locale}/`}>
-                                    كيف نعمل
-                                </NavLink>
-                            </li>
-
-                            <li>
-                                <NavLink href={`/${locale}/`}>
+                                <NavLink href={`/${locale}/faqs`}>
                                     الأسئلة الشائعة
                                 </NavLink>
                             </li>
@@ -144,7 +138,7 @@ export default function Header({ locale, services }: HeaderProps) {
                     <div className="hidden items-center gap-3 lg:flex">
                         <ChangeLanguage />
 
-                        <Link href={`/${locale}/contact`} className="rounded-[12px] bg-primary px-4 py-3 text-custom14 font-[600] text-white transition-colors duration-300 hover:bg-secondary">
+                        <Link href={`/${locale}/contact-us`} className="rounded-[12px] bg-primary px-4 py-3 text-custom14 font-[600] text-white transition-colors duration-300 hover:bg-secondary">
                             تواصل معنا الآن
                         </Link>
                     </div>
@@ -152,7 +146,6 @@ export default function Header({ locale, services }: HeaderProps) {
                     {/* Mobile Actions */}
                     <div className="flex items-center gap-3 lg:hidden">
                         <ChangeLanguage />
-
                         <button type="button" onClick={() => setIsMenuOpen(true)} aria-label="فتح القائمة" aria-expanded={isMenuOpen} className="flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-[10px] bg-primary text-white transition-[background-color,transform] duration-300 hover:bg-secondary active:scale-95">
                             <FaBars size={20} />
                         </button>
@@ -226,19 +219,13 @@ export default function Header({ locale, services }: HeaderProps) {
                         </li>
 
                         <li>
-                            <MobileLink href={`/${locale}/`} onClick={closeMenu}>
+                            <MobileLink href={`/${locale}/projects`} onClick={closeMenu}>
                                 أعمالنا
                             </MobileLink>
                         </li>
 
                         <li>
-                            <MobileLink href={`/${locale}/`} onClick={closeMenu}>
-                                كيف نعمل
-                            </MobileLink>
-                        </li>
-
-                        <li>
-                            <MobileLink href={`/${locale}/`} onClick={closeMenu}>
+                            <MobileLink href={`/${locale}/faqs`} onClick={closeMenu}>
                                 الأسئلة الشائعة
                             </MobileLink>
                         </li>
@@ -254,7 +241,7 @@ export default function Header({ locale, services }: HeaderProps) {
 
                 {/* SideNav Footer */}
                 <div className="border-t border-black/5 p-5">
-                    <Link href={`/${locale}/contact`} onClick={closeMenu} className="flex w-full items-center justify-center rounded-[12px] bg-primary px-5 py-4 font-[700] text-white transition-colors duration-300 hover:bg-secondary">
+                    <Link href={`/${locale}/contact-us`} onClick={closeMenu} className="flex w-full items-center justify-center rounded-[12px] bg-primary px-5 py-4 font-[700] text-white transition-colors duration-300 hover:bg-secondary">
                         تواصل معنا الآن
                     </Link>
                 </div>
