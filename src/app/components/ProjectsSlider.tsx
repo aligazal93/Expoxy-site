@@ -53,10 +53,8 @@ export default function ProjectsSlider({
             </h2>
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center gap-4 lg:min-w-[320px]" dir="ltr">
+          <div className="flex items-center gap-4 lg:min-w-[320px]" >
 
-            {/* Previous */}
             <button
               type="button"
               onClick={() => swiperRef.current?.slidePrev()}
@@ -163,7 +161,7 @@ export default function ProjectsSlider({
 
 function ProjectCard({ project, locale }) {
   const isArabic = locale === "ar";
-  const projectUrl = `/${locale}`;
+  const projectUrl = `/${locale}/projects/${project.id}`;
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-[#DDD8D1] bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(16,32,39,0.08)]">

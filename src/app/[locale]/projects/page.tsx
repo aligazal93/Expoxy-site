@@ -104,7 +104,6 @@ function ProjectCard({ project, locale }) {
                 </span>
             </Link>
 
-            {/* Content */}
             <div className="flex flex-1 flex-col px-5 pb-6 pt-7 md:px-6">
 
                 {project.category && (
