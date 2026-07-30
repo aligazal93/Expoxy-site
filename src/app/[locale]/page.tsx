@@ -7,6 +7,7 @@ import ProcessSection from "../components/ProcessSection";
 import FaqSection from "../components/Faqs";
 import { getHomeData } from "../services/home";
 import WhyEpoxyHome from "@/components/home/WhyEpoxy";
+import DesignGallerySection from "../components/DesignGallerySection";
 
 const projects = [
   {
@@ -64,6 +65,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 projects={projects}
                 locale={locale}
             />
+            <DesignGallerySection locale={locale} />
             <ProcessSection locale={locale} />
             <FaqSection locale={locale} />
         </>

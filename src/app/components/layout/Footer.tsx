@@ -113,9 +113,8 @@ export default function Footer({ locale }: FooterProps) {
 
                                 <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
                             </a>
-                            <Link href="/request-design" className="group inline-flex min-h-[44px] items-center justify-center mx-2 gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
+                            <Link href={`/${locale}/flooring-design`} className="group inline-flex min-h-[44px] items-center justify-center mx-2 gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
                                 اطلب تصميم أرضيتك
-
                                 <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
                             </Link>
                         </div>

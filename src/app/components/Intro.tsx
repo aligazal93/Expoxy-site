@@ -20,14 +20,12 @@ export default function Intro({ locale = "ar" }: { locale?: string }) {
       <div className="container relative z-10 flex items-center justify-center py-[100px] text-center lg:py-[150px]">
         <div className="mx-auto w-full text-white">
 
-          {/* Badge */}
           <div className="hero-fade-up hero-delay-1">
             <span className="rounded-[30px] border border-[#17B3F7] bg-[rgba(8,165,234,0.1)] px-8 py-3 text-custom14 font-[700] leading-none">
               الأولى للإيبوكسي رائدة في تصميم الأرضيات الفاخرة
             </span>
           </div>
 
-          {/* Title */}
           <h1
             id="hero-title"
             className="hero-fade-up hero-delay-2 mx-auto mt-8 w-full text-[36px] font-[700] leading-relaxed tracking-[-0.02em] sm:text-[44px] md:text-[52px] lg:w-[60%] lg:text-[58px] xl:text-[64px]"

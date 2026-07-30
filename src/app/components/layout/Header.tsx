@@ -126,7 +126,7 @@ export default function Header({ locale, services }: HeaderProps) {
                             </li>
 
                             <li>
-                                <NavLink href={`/${locale}`}>
+                                <NavLink href={`/${locale}/flooring-design`}>
                                     اطلب تصميم أرضيتك
                                 </NavLink>
                             </li>
@@ -231,7 +231,7 @@ export default function Header({ locale, services }: HeaderProps) {
                         </li>
 
                         <li>
-                            <MobileLink href={`/${locale}`} onClick={closeMenu}>
+                            <MobileLink href={`/${locale}/flooring-design`} onClick={closeMenu}>
                                 اطلب تصميم أرضيتك
                             </MobileLink>
                         </li>
