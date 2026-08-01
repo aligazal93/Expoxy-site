@@ -1,31 +1,9 @@
 "use client";
 import { usePathname } from "next/navigation";
 
-const defaultSteps = [
-  {
-    id: 1,
-    title: "أرسل تفاصيل مساحتك",
-    description: "شاركنا صورة المكان، المقاسات، ونوع المساحة من خلال نموذج الطلب أو واتساب.",
-  },
-  {
-    id: 2,
-    title: "ننجز التصور والتصميم",
-    description: "يقوم فريقنا بدراسة المساحة واقتراح التصميم المناسب مع تصور بصري يوضح الشكل النهائي.",
-  },
-  {
-    id: 3,
-    title: "اختيار التصميم والتجهيز",
-    description: "بعد اعتماد التصميم، نحدد التفاصيل النهائية ونجهز الموقع للتنفيذ بأفضل المعايير.",
-  },
-  {
-    id: 4,
-    title: "تنفيذ أرضيتك باحترافية",
-    description: "ننّفذ طبقات الإيبوكسي بدقة للحصول على تشطيب فاخر، متين ويدوم طويلًا.",
-  },
-];
 
 export default function ProcessSection({
-  steps = defaultSteps,
+  processes = [],
   locale = "ar",
 }) {
   const isArabic = locale === "ar";
@@ -55,7 +33,7 @@ export default function ProcessSection({
           </span>
 
           <h2 id="process-title" className={`text-[28px] font-bold leading-[1.5] ${isHome ? "text-white" : "text-dark"} md:text-[36px] lg:text-[42px]`}>
-             من الفكرة إلى أرضية أحلامك في خطوات بسيطة
+            من الفكرة إلى أرضية أحلامك في خطوات بسيطة
           </h2>
         </header>
 
@@ -68,8 +46,8 @@ export default function ProcessSection({
           <div className={`absolute bottom-[15px] top-[15px] w-[2px] bg-[#0783ad] lg:hidden ${isArabic ? "right-[8px]" : "left-[8px]"}`} />
 
           <div className="relative flex flex-col gap-6 lg:gap-[50px]">
-            {steps.map((step, index) => (
-              <ProcessStep key={step.id} step={step} index={index} isArabic={isArabic} />
+            {processes.map((step, index) => (
+              <ProcessStep key={step.title} step={step} index={index} isArabic={isArabic} />
             ))}
           </div>
         </div>
@@ -141,7 +119,7 @@ function ProcessCard({ step, index, isArabic }) {
           </h3>
 
           <p className="text-[13px] leading-[2] text-[#686868] md:text-[14px]">
-            {step.description}
+            {step.content}
           </p>
         </div>
       </div>

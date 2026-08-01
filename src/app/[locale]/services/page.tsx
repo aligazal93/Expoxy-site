@@ -30,8 +30,6 @@ export default async function OurServices({ params }: { params: Promise<{ locale
             <WhyUsEpoxy locale={locale} />
             <AllServices services={data.services} locale={locale} />
             <FaqSection locale={locale} />
-
-
         </>
     );
 }

@@ -8,61 +8,31 @@ import {
     FaTiktok,
     FaSnapchat,
     FaXTwitter,
+    FaFacebookF,
+    FaTwitter,
+    FaX,
 } from "react-icons/fa6";
 
 import FloatingActions from "./FloatingButton";
 import { usePathname } from "next/navigation";
+import { Information } from "@/app/types/home";
 
-const mainLinks = [
-    { id: 1, title: "الرئيسية", href: "/" },
-    { id: 2, title: "خدماتنا", href: "/" },
-    { id: 3, title: "أعمالنا", href: "/" },
-    { id: 4, title: "كيف نعمل", href: "/" },
-];
 
-const importantLinks = [
-    { id: 1, title: "الأسئلة الشائعة", href: "/#" },
-    { id: 2, title: "طلب استشارة", href: "/" },
-    { id: 3, title: "سياسة الخصوصية", href: "/" },
-    { id: 4, title: "الشروط والأحكام", href: "/" },
-];
 
-const socialLinks = [
-    {
-        id: 1,
-        title: "Instagram",
-        href: "https://instagram.com/",
-        icon: FaInstagram,
-    },
-    {
-        id: 2,
-        title: "Snapchat",
-        href: "https://snapchat.com/",
-        icon: FaSnapchat,
-    },
-    {
-        id: 3,
-        title: "TikTok",
-        href: "https://tiktok.com/",
-        icon: FaTiktok,
-    },
-    {
-        id: 4,
-        title: "X",
-        href: "https://x.com/",
-        icon: FaXTwitter,
-    },
-];
 
 type FooterProps = {
     locale: string;
+    info?: Information;
 };
 
-export default function Footer({ locale }: FooterProps) {
+export default function Footer({ locale, info }: FooterProps) {
     const currentYear = new Date().getFullYear();
     const pathname = usePathname();
 
     const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+
+    const whatsappNumber = info?.whatsapp?.replace(/\D/g, "") ?? "";
+    const phoneNumber = info?.phone?.replace(/[^\d+]/g, "") ?? "";
 
     return (
         <footer className={`relative ${isHome ? "mt-[120px]" : "mt-[0px]"} bg-[#002433]  text-white ${isHome ? "rounded-t-[75px]" : "rounded-t-[0px]"}`}>
@@ -80,7 +50,7 @@ export default function Footer({ locale }: FooterProps) {
                         </p>
 
                         <div className="flex flex-wrap items-center justify-center gap-3">
-                            <a href="https://wa.me/966000000000" target="_blank" rel="noopener noreferrer" className="group inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
+                            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="group inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
                                 تواصل عبر واتساب
 
                                 <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
@@ -108,7 +78,7 @@ export default function Footer({ locale }: FooterProps) {
                     </div>
                     <div>
                         <div className="block lg:flex flex-wrap items-center justify-center gap-8">
-                            <a href="https://wa.me/966000000000" target="_blank" rel="noopener noreferrer" className="group  inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
+                            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="group  inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
                                 تواصل عبر واتساب
 
                                 <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />
@@ -135,19 +105,39 @@ export default function Footer({ locale }: FooterProps) {
                         </h2>
 
                         <p className="max-w-[320px] text-[14px] leading-[2] text-white">
-                            متخصصون في تصميم وتنفيذ أرضيات الإيبوكسي ثلاثية الأبعاد والتشطيبات الفاخرة. نقدم حلول أرضيات مبتكرة تجمع بين الجمال والجودة والمتانة لتحويل المساحات إلى تجارب بصرية استثنائية.
+                            {info?.small_about || ""}
                         </p>
 
                         <div className="mt-6 flex items-center gap-3">
-                            {socialLinks.map((social) => {
-                                const Icon = social.icon;
-
-                                return (
-                                    <a key={social.id} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.title} className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[17px] text-white/80 transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
-                                        <Icon aria-hidden="true" />
+                            <ul className="flex items-center gap-3">
+                                <li>
+                                    <a href={info?.facebook || ""} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[17px] text-white/80 transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
+                                        <FaFacebookF aria-hidden="true" />
                                     </a>
-                                );
-                            })}
+                                </li>
+                                <li>
+                                    <a href={info?.instagram || ""} target="_blank" rel="noopener noreferrer" aria-label="instagram" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[17px] text-white/80 transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
+                                        <FaInstagram aria-hidden="true" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={info?.twitter || ""} target="_blank" rel="noopener noreferrer" aria-label="twitter" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[17px] text-white/80 transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
+                                        <FaX aria-hidden="true" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={info?.tiktok || ""} target="_blank" rel="noopener noreferrer" aria-label="tiktok" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[17px] text-white/80 transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
+                                        <FaTiktok aria-hidden="true" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={info?.snapchat || ""} target="_blank" rel="noopener noreferrer" aria-label="snapchat" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[17px] text-white/80 transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
+                                        <FaSnapchat aria-hidden="true" />
+                                    </a>
+                                </li>
+
+                            </ul>
+
                         </div>
                     </div>
 
@@ -158,13 +148,32 @@ export default function Footer({ locale }: FooterProps) {
                         </h2>
 
                         <ul className="space-y-3">
-                            {mainLinks.map((link) => (
-                                <li key={link.id}>
-                                    <Link href={link.href} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
-                                        {link.title}
-                                    </Link>
-                                </li>
-                            ))}
+                            <li>
+                                <Link href={`${locale}/`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
+                                    الرئيسية
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={`${locale}/about-us`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
+                                    من نحن
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={`${locale}/projects`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
+                                    مشاريعنا
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={`${locale}/services`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
+                                    خدماتنا
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={`${locale}/contact-us`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
+                                    تواصل معنا
+                                </Link>
+                            </li>
+
                         </ul>
                     </nav>
 
@@ -175,13 +184,16 @@ export default function Footer({ locale }: FooterProps) {
                         </h2>
 
                         <ul className="space-y-3">
-                            {importantLinks.map((link) => (
-                                <li key={link.id}>
-                                    <Link href={link.href} className="inline-block text-[14px] text-white/70 transition-colors duration-300 hover:text-[#13AEEB]">
-                                        {link.title}
-                                    </Link>
-                                </li>
-                            ))}
+                            <li>
+                                <Link href={`${locale}/`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
+                                    سياسة الخصوصية
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={`${locale}/`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
+                                    الشروط و الاحكام
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
 
@@ -197,9 +209,12 @@ export default function Footer({ locale }: FooterProps) {
                                     الهاتف
                                 </span>
 
-                                <a href="tel:+9664564564569" className="inline-flex items-center gap-2 text-custom14 text-white/80 transition-colors duration-300 hover:text-[#13AEEB]">
-                                    <Image src="/images/phone.png" className="object-cover" alt="phone" width={20} height={20} />
-                                    +966 456 456 4569
+                                <a href={`tel:${info?.phone?.replace(/\s/g, "") || ""}`} dir="rtl" className="inline-flex items-center gap-2 text-custom14 text-white/80 transition-colors duration-300 hover:text-[#13AEEB]">
+                                    <Image src="/images/phone.png" className="object-contain" alt="phone" width={20} height={20} />
+
+                                    <span dir="ltr" className="text-right">
+                                        {info?.phone || ""}
+                                    </span>
                                 </a>
                             </div>
 
@@ -210,7 +225,7 @@ export default function Footer({ locale }: FooterProps) {
 
                                 <a href="mailto:info@epoxy.libya.com" className="inline-flex items-center gap-2 text-custom14 text-white/80 transition-colors duration-300 hover:text-[#13AEEB]">
                                     <Image src="/images/msg.png" className="object-cover" alt="phone" width={20} height={20} />
-                                    info@epoxy.libya.com
+                                    {info?.email || ""}
                                 </a>
                             </div>
 
@@ -222,7 +237,7 @@ export default function Footer({ locale }: FooterProps) {
 
                                 <span className="inline-flex items-center gap-2 text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
                                     <Image src="/images/location.png" className="object-cover" alt="phone" width={16} height={16} />
-                                    لبيا، طرابلس، مصراتة، بني غازي
+                                    {info?.address || ""}
                                 </span>
                             </div>
 
@@ -242,7 +257,7 @@ export default function Footer({ locale }: FooterProps) {
                     </p>
                 </div>
 
-                <FloatingActions />
+                <FloatingActions locale={locale} info={info} />
 
             </div>
         </footer>

@@ -17,30 +17,34 @@ import "swiper/css";
 
 export default function ProjectsSlider({
   projects = [],
-  locale = "ar",
+  locale,
 }) {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const isArabic = locale === "ar";
 
+  const handleNext = () => {
+    swiperRef.current?.slideNext();
+  };
+
+  const handlePrevious = () => {
+    swiperRef.current?.slidePrev();
+  };
+
   if (!projects?.length) return null;
 
   return (
-    <section
-      className="overflow-hidden py-[70px] lg:py-[50px]"
-      dir={isArabic ? "rtl" : "ltr"}
-      aria-labelledby="projects-heading"
-    >
+    <section className="overflow-hidden py-[70px] lg:py-[50px]" dir={isArabic ? "rtl" : "ltr"} aria-labelledby="projects-heading">
       <div className="container">
 
         {/* Header */}
         <div className="mb-8 flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
-          
+
           {/* Title */}
           <div>
             <span className="mb-5 inline-flex rounded-full border border-[#DED8D0] px-4 py-[7px] text-[13px] font-medium text-[#807B75]">
-              {isArabic ? "معرض الأعمال" : "Our Projects"}
+              {locale === "ar" ? "معرض الأعمال" : "Our Projects"}
             </span>
 
             <h2
@@ -53,59 +57,32 @@ export default function ProjectsSlider({
             </h2>
           </div>
 
-          <div className="flex items-center gap-4 lg:min-w-[320px]" >
 
-            <button
-              type="button"
-              onClick={() => swiperRef.current?.slidePrev()}
-              aria-label={isArabic ? "المشروع السابق" : "Previous project"}
-              className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full border border-[#DDD8D1] bg-white text-[#16252B] transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white"
-            >
-              <FaArrowLeftLong size={16} />
-            </button>
-
-            {/* Next */}
-            <button
-              type="button"
-              onClick={() => swiperRef.current?.slideNext()}
-              aria-label={isArabic ? "المشروع التالي" : "Next project"}
-              className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full border border-[#DDD8D1] bg-white text-[#16252B] transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white"
-            >
-              <FaArrowRightLong size={16} />
-            </button>
-
+          <div dir="ltr" className="flex items-center gap-4 lg:min-w-[320px]">
             {/* Progress */}
-            <div
-              className="flex h-[2px] flex-1 items-center gap-[3px]"
-              role="progressbar"
-              aria-valuemin={1}
-              aria-valuemax={projects.length}
-              aria-valuenow={activeIndex + 1}
-              aria-label={isArabic ? "تقدم معرض الأعمال" : "Projects progress"}
-            >
+            <div className="flex h-[2px] flex-1 items-center gap-[3px]" role="progressbar" aria-valuemin={1} aria-valuemax={projects.length} aria-valuenow={activeIndex + 1} aria-label={isArabic ? "تقدم معرض الأعمال" : "Projects progress"}>
               {projects.map((project, index) => (
-                <button
-                  key={project.id}
-                  type="button"
-                  onClick={() => swiperRef.current?.slideToLoop(index)}
-                  aria-label={
-                    isArabic
-                      ? `عرض المشروع ${index + 1}`
-                      : `View project ${index + 1}`
-                  }
-                  className="group/progress relative h-[12px] flex-1"
-                >
-                  <span
-                    className={`absolute left-0 top-1/2 h-[2px] w-full -translate-y-1/2 transition-colors duration-500 ${index === activeIndex ? "bg-[#05AEEF]" : "bg-[#DDD5CA]"}`}
-                  />
+                <button key={project.id} type="button" onClick={() => swiperRef.current?.slideToLoop(index)} aria-label={isArabic ? `عرض المشروع ${index + 1}` : `View project ${index + 1}`} className="group/progress relative h-[12px] flex-1">
+                  <span className={`absolute left-0 top-1/2 h-[2px] w-full -translate-y-1/2 transition-colors duration-500 ${index === activeIndex ? "bg-[#05AEEF]" : "bg-[#DDD5CA]"}`} />
                 </button>
               ))}
             </div>
+            <button type="button" onClick={handlePrevious} aria-label={isArabic ? "المشروع التالي" : "Next project"} className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full border border-[#DDD8D1] bg-white text-[#16252B] transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
+              <FaArrowLeftLong size={16} />
+            </button>
+            {/* Previous */}
+            <button type="button" onClick={handleNext} aria-label={isArabic ? "المشروع السابق" : "Previous project"} className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full border border-[#DDD8D1] bg-white text-[#16252B] transition-all duration-300 hover:border-[#05AEEF] hover:bg-[#05AEEF] hover:text-white">
+              <FaArrowRightLong size={16} />
+            </button>
           </div>
+
+
         </div>
 
         {/* Slider */}
         <Swiper
+          key={locale}
+          dir={isArabic ? "rtl" : "ltr"}
           modules={[A11y, Autoplay]}
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
@@ -125,9 +102,7 @@ export default function ProjectsSlider({
           watchOverflow
           slidesPerView={1.12}
           spaceBetween={14}
-          a11y={{
-            enabled: true,
-          }}
+          a11y={{ enabled: true }}
           breakpoints={{
             540: {
               slidesPerView: 1.5,
@@ -175,7 +150,7 @@ function ProjectCard({ project, locale }) {
         <div className="relative aspect-[1.05/1] overflow-hidden">
           <Image
             src={project.image}
-            alt={project.alt || project.title}
+            alt={project.name || project.subtitle}
             fill
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             sizes="(max-width: 539px) 88vw, (max-width: 766px) 65vw, (max-width: 989px) 50vw, 33vw"
@@ -194,9 +169,9 @@ function ProjectCard({ project, locale }) {
       {/* Content */}
       <div className="flex flex-1 flex-col px-5 pb-6 pt-7 md:px-6">
 
-        {project.category && (
+        {project.name && (
           <p className="mb-3 text-[13px] font-medium leading-6 text-[#817D78]">
-            {project.category}
+            {project.name}
           </p>
         )}
 
@@ -205,7 +180,7 @@ function ProjectCard({ project, locale }) {
             href={projectUrl}
             className="transition-colors duration-300 hover:text-[#05AEEF]"
           >
-            {project.title}
+            {project.subtitle}
           </Link>
         </h3>
       </div>

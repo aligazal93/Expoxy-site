@@ -1,12 +1,15 @@
+import { Information } from "@/app/types/home";
 import { FaWhatsapp } from "react-icons/fa6";
 import { LuPhone } from "react-icons/lu";
 
-export default function FloatingButton({ locale }: { locale?: string }) {
+
+
+export default function FloatingButton({ locale, info }: { locale?: string, info?: Information }) {
     return (
-        <div className="fixed bottom-[20px] left-[15px] z-[999] flex flex-col items-end gap-3 sm:bottom-[25px] sm:right-[25px]">
+        <div className="fixed bottom-[20px] w-[120px] mx-auto text-center left-[15px] z-[999] flex flex-col items-end gap-3 sm:bottom-[25px] sm:left-[25px]">
 
             {/* WhatsApp */}
-            <a href="https://wa.me/966000000000" target="_blank" rel="noopener noreferrer" aria-label="تواصل معنا عبر واتساب" className="group relative flex items-center justify-end">
+            <a href={`https://wa.me/${info?.whatsapp}`}  target="_blank" rel="noopener noreferrer" aria-label="تواصل معنا عبر واتساب" className="group relative flex items-center justify-end">
                 <span className="mr-2 hidden max-w-0 overflow-hidden whitespace-nowrap rounded-full bg-[#122A34] px-0 py-2 text-[13px] font-[600] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:max-w-[160px] group-hover:px-4 group-hover:opacity-100 sm:block">
                     تواصل عبر واتساب
                 </span>
@@ -19,8 +22,8 @@ export default function FloatingButton({ locale }: { locale?: string }) {
             </a>
 
             {/* Call */}
-            <a href="tel:+9666666666666" aria-label="اتصل بنا الآن" className="group relative flex items-center justify-end">
-                <span className="mr-2 hidden max-w-0 overflow-hidden whitespace-nowrap rounded-full bg-[#122A34] px-0 py-2 text-[13px] font-[600] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:max-w-[130px] group-hover:px-4 group-hover:opacity-100 sm:block">
+            <a href={`tel:${info?.phone}`} aria-label="اتصل بنا الآن" className="group relative flex items-center justify-end">
+                <span className="mr-2 hidden max-w-0 overflow-hidden whitespace-nowrap rounded-full bg-[#122A34] px-0 py-2 text-[13px] font-[600] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:max-w-[130px] group-hover:x:opacity-100 sm:block">
                     اتصل بنا الآن
                 </span>
 

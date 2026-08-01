@@ -53,3 +53,20 @@ export function useClients(locale: string) {
     select: (data) => data.clients,
   });
 }
+
+export function useInformation(locale: string) {
+  return useQuery({
+    queryKey: homeKeys.detail(locale),
+    queryFn: () => getHomeData(locale),
+    select: (data) => data.informations,
+  });
+}
+
+
+export function useCategories(locale: string) {
+  return useQuery({
+    queryKey: homeKeys.detail(locale),
+    queryFn: () => getHomeData(locale),
+    select: (data) => data.categories,
+  });
+}

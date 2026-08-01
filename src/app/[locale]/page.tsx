@@ -53,21 +53,22 @@ const projects = [
 ];
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-    const { locale } = await params;
-    const data = await getHomeData(locale);
-    return (
-        <>
-            <Intro locale={locale} />
-            <BrandsSlider  locale={locale} />
-            <WhyEpoxy locale={locale} />
-            <Services services={data.services} locale={locale}  />
-            <ProjectsSlider
-                projects={projects}
-                locale={locale}
-            />
-            <DesignGallerySection locale={locale} />
-            <ProcessSection locale={locale} />
-            <FaqSection locale={locale} />
-        </>
-    );
+  const { locale } = await params;
+  const data = await getHomeData(locale);
+  return (
+    <>
+      <Intro locale={locale} />
+      <BrandsSlider locale={locale} clients={data?.clients || []} />
+      <WhyEpoxy locale={locale} />
+      <Services services={data?.services || []} locale={locale} />
+      <ProjectsSlider
+        projects={data?.projects || []}
+        locale={locale}
+      />
+      <DesignGallerySection categories={data?.categories ?? []} designs={data?.designs ?? []} locale={locale} />
+      <ProcessSection processes={data?.steps || []} locale={locale} />
+      <FaqSection faqs={data?.questions || []} info={data?.informations || {}} locale={locale} />
+
+    </>
+  );
 }

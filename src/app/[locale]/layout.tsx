@@ -80,7 +80,7 @@ export default async function LocaleLayout({
           {children}
         </TanstackProvider>
 
-        <Footer locale={locale} />
+        <Footer locale={locale} info={homeData.informations || {}} />
 
       </body>
     </html>

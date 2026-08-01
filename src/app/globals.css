@@ -87,53 +87,52 @@
     transform: translateX(-50%);
   }
 }
-
 .clients-track {
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: clientsMarquee 22s linear infinite;
+  animation: clients-marquee 20s linear infinite;
+}
+
+.clients-track-reverse {
+  animation-direction: reverse;
 }
 
 .clients-group {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  gap: 70px;
-  padding-inline: 35px;
-}
-
-@keyframes clientsMarquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
+  gap: 40px;
+  padding-right: 40px;
 }
 
 .clients-track:hover {
   animation-play-state: paused;
 }
 
+@keyframes clients-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (max-width: 767px) {
+  .clients-track {
+    animation-duration: 14s;
+  }
+
   .clients-group {
-    gap: 40px;
-    padding-inline: 20px;
+    gap: 24px;
+    padding-right: 24px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .clients-track {
-    animation: none;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .clients-marquee {
-    animation: none;
-    transform: none;
+    animation-play-state: paused;
   }
 }

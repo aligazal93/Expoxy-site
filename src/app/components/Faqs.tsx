@@ -4,54 +4,33 @@ import { useState } from "react";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa6";
 
-const defaultFaqs = [
-    {
-        id: 1,
-        question: "هل يمكن التنفيذ فوق السيراميك؟",
-        answer: "نعم، يمكن تنفيذ الإيبوكسي فوق السيراميك بعد تجهيز السطح بشكل صحيح لضمان التصاق مثالي وعمر أطول.",
-    },
-    {
-        id: 2,
-        question: "هل أرضيات الإيبوكسي مقاومة للبكتيريا؟",
-        answer: "نعم، سطح الإيبوكسي المتجانس وقليل الفواصل يساعد على سهولة التنظيف ويجعله مناسبًا للعديد من المساحات التي تتطلب مستوى عاليًا من النظافة.",
-    },
-    {
-        id: 3,
-        question: "كم تستغرق مدة التنفيذ؟",
-        answer: "تختلف مدة التنفيذ حسب مساحة المشروع، حالة الأرضية، ونوع التصميم، ويتم تحديد المدة المتوقعة بعد معاينة الموقع.",
-    },
-    {
-        id: 4,
-        question: "كيف يتم حساب السعر؟",
-        answer: "يتم تحديد السعر بناءً على المساحة، حالة الأرضية الحالية، نوع الإيبوكسي، التصميم المختار ومتطلبات التجهيز والتنفيذ.",
-    },
-    {
-        id: 5,
-        question: "هل الإيبوكسي مقاوم للخدش؟",
-        answer: "يتميز الإيبوكسي بمتانة عالية ومقاومة جيدة للاستخدام اليومي، ويمكن اختيار طبقات حماية إضافية حسب طبيعة واستخدام المكان.",
-    },
-    {
-        id: 6,
-        question: "هل يمكن رؤية التصميم قبل التنفيذ؟",
-        answer: "نعم، يمكن إعداد تصور مبدئي للتصميم لمساعدتك على رؤية شكل الأرضية واختيار الألوان والنمط المناسب قبل بدء التنفيذ.",
-    },
-    {
-        id: 7,
-        question: "كيف تتم صيانة الأرضية؟",
-        answer: "تتميز أرضيات الإيبوكسي بسهولة الصيانة، ويكفي تنظيفها بشكل دوري باستخدام أدوات ومنظفات مناسبة للحفاظ على مظهرها.",
-    },
-];
+interface FaqItem {
+    id?: number | string;
+    title: string;
+    content: string;
+}
 
-export default function FaqSection({
-    faqs = defaultFaqs,
-    locale,
-}: { faqs?: any[], locale?: string }) {
-    const [openIndex, setOpenIndex] = useState(0);
+interface FaqSectionProps {
+    faqs?: FaqItem[];
+    info?: {
+        whatsapp?: string;
+    };
+    locale?: string;
+}
 
-    const handleToggle = (index) => {
+export default function FaqSection({ faqs = [], info = {}, locale = "ar" }: FaqSectionProps) {
+    const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+    const isArabic = locale === "ar";
+    const whatsappNumber = info.whatsapp?.replace(/\D/g, "");
+    const whatsappMessage = isArabic ? "مرحبًا، لدي استفسار بخصوص خدمات الإيبوكسي" : "Hello, I have a question about your epoxy services";
+    const whatsappUrl = whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}` : "";
+
+    const handleToggle = (index: number) => {
         setOpenIndex((current) => (current === index ? null : index));
     };
 
+    if (faqs.length === 0) return null;
     return (
         <section className="container py-[70px] md:py-[90px] lg:py-[110px]" aria-labelledby="faq-heading">
             <div className="grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
@@ -59,7 +38,7 @@ export default function FaqSection({
                 {/* Content */}
                 <div className="text-start lg:pt-3">
                     <span className="mb-6 block text-[13px] font-medium text-[#96908A]">
-                        أسئلة شائعة
+                        أسئلة شائعة 
                     </span>
 
                     <h2 id="faq-heading" className="mb-5 text-[30px] font-bold leading-[1.4] text-[#102027] md:text-[38px] lg:text-[44px]">
@@ -70,13 +49,13 @@ export default function FaqSection({
                         جمعنا لك أكثر الأسئلة تكرارًا. إن لم تجد إجابتك، تواصل معنا مباشرة.
                     </p>
 
-                    <Link href="" className="inline-flex min-h-[44px] items-center mx-1 justify-center rounded-full border border-[#05AEEF] px-6 text-[14px] font-medium text-[#05AEEF] transition-all duration-300 hover:bg-[#05AEEF] hover:text-white">
+                    <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center mx-1 justify-center rounded-full border border-[#05AEEF] px-6 text-[14px] font-medium text-[#05AEEF] transition-all duration-300 hover:bg-[#05AEEF] hover:text-white">
                         اسألنا عبر الواتساب
                     </Link>
 
-                    <a href="/images/epoxy.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center mx-1 justify-center rounded-full border border-[#05AEEF] px-6 text-[14px] font-medium text-[#05AEEF] transition-all duration-300 hover:bg-[#05AEEF] hover:text-white">
+                    {/* <a href="/images/epoxy.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center mx-1 justify-center rounded-full border border-[#05AEEF] px-6 text-[14px] font-medium text-[#05AEEF] transition-all duration-300 hover:bg-[#05AEEF] hover:text-white">
                         تحميل ملف الشركة
-                    </a>
+                    </a> */}
                 </div>
 
                 {/* Accordion */}
@@ -87,7 +66,7 @@ export default function FaqSection({
                         const buttonId = `faq-button-${faq.id}`;
 
                         return (
-                            <article key={faq.id} className="border-b border-[#DED8D0]">
+                            <article key={index} className="border-b border-[#DED8D0]">
                                 <h3>
                                     <button
                                         id={buttonId}
@@ -98,7 +77,7 @@ export default function FaqSection({
                                         className="flex w-full items-center justify-between gap-5 py-[20px] text-start"
                                     >
                                         <span className="text-[16px] font-bold leading-[1.7] text-[#14242B] md:text-[18px]">
-                                            {faq.question}
+                                            {faq.title}
                                         </span>
 
                                         <FaChevronDown className={`shrink-0 text-[13px] text-[#14242B] transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`} aria-hidden="true" />
@@ -108,7 +87,7 @@ export default function FaqSection({
                                 <div id={contentId} role="region" aria-labelledby={buttonId} className={`grid transition-[grid-template-rows,opacity] duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                                     <div className="overflow-hidden">
                                         <p className="max-w-[620px] pb-[20px] text-[13px] leading-[2] text-[#706D69] md:text-[14px]">
-                                            {faq.answer}
+                                            {faq.content}
                                         </p>
                                     </div>
                                 </div>
