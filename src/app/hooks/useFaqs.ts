@@ -8,7 +8,7 @@ export function useFaqs(locale: string) {
     queryKey: ["faqs", locale],
     queryFn: () => getFaqs(locale),
     enabled: Boolean(locale),
-    staleTime: 5 * 60 * 1000,
-    retry: 1,
+    staleTime: 0,
+    refetchOnMount: "always",
   });
 }

@@ -8,9 +8,14 @@ import { FaAngleDown, FaBars, FaXmark } from "react-icons/fa6";
 import ChangeLanguage from "./ChangeLanguage";
 import { Service } from "@/app/types/home";
 
+import { Information } from "@/app/types/home";
+
+
+
 type HeaderProps = {
     locale: string;
     services: Service[];
+    info: Information;
 };
 
 type LinkProps = {
@@ -22,7 +27,7 @@ type MobileLinkProps = LinkProps & {
     onClick: () => void;
 };
 
-export default function Header({ locale, services }: HeaderProps) {
+export default function Header({ locale, services, info }: HeaderProps) {
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [isServicesOpen, setIsServicesOpen] = useState<boolean>(false);
@@ -59,6 +64,8 @@ export default function Header({ locale, services }: HeaderProps) {
         setIsMenuOpen(false);
         setIsServicesOpen(false);
     };
+  const isArabic = locale === "ar";
+
 
     return (
         <>
@@ -67,7 +74,7 @@ export default function Header({ locale, services }: HeaderProps) {
 
                     {/* Logo */}
                     <Link href={`/${locale}`} className="relative z-10 shrink-0">
-                        <Image src="/images/logo.png" alt="الأولى للإيبوكسي" width={100} height={50} priority className="h-[50px] w-[100px] object-contain" />
+                        <Image src={info?.logo || "/images/logo.png"} alt="الأولى للإيبوكسي" width={150} height={50} priority className="h-[70px] w-[150px] object-contain" />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -76,20 +83,20 @@ export default function Header({ locale, services }: HeaderProps) {
 
                             <li>
                                 <NavLink href={`/${locale}`}>
-                                    الرئيسية
+                                    {isArabic ? " الرئيسية" : "Home"}
                                 </NavLink>
                             </li>
 
                             <li>
                                 <NavLink href={`/${locale}/about-us`}>
-                                    من نحن
+                                    {isArabic ? "من نحن" : "About Us"}
                                 </NavLink>
                             </li>
 
                             {/* Services */}
                             <li className="group relative">
                                 <Link href={`/${locale}/services`} className="flex items-center gap-2 py-5 transition-colors duration-300 hover:text-primary">
-                                    خدماتنا
+                                    {isArabic ? "خدماتنا" : "Services"}
 
                                     <FaAngleDown size={13} className="transition-transform duration-300 ease-out group-hover:rotate-180" />
                                 </Link>
@@ -100,7 +107,7 @@ export default function Header({ locale, services }: HeaderProps) {
                                     <div className="overflow-hidden rounded-[16px] border border-black/[0.06] bg-white p-2 shadow-[0_20px_50px_rgba(0,0,0,0.10)]">
 
                                         <DropdownLink href={`/${locale}/services`}>
-                                            كل الخدمات
+                                            {isArabic ? "كل الخدمات" : "All Services"}
                                         </DropdownLink>
 
                                         {services.map((service, index) => (
@@ -115,19 +122,19 @@ export default function Header({ locale, services }: HeaderProps) {
 
                             <li>
                                 <NavLink href={`/${locale}/projects`}>
-                                    أعمالنا
+                                    {isArabic ? "أعمالنا" : "Projects"}
                                 </NavLink>
                             </li>
 
                             <li>
                                 <NavLink href={`/${locale}/faqs`}>
-                                    الأسئلة الشائعة
+                                    {isArabic ? "الأسئلة الشائعة" : "FAQs"}
                                 </NavLink>
                             </li>
 
                             <li>
                                 <NavLink href={`/${locale}/flooring-design`}>
-                                    اطلب تصميم أرضيتك
+                                    {isArabic ? "أطلب تصميم أرضيتك" : "Order Flooring Design"}
                                 </NavLink>
                             </li>
 
@@ -139,7 +146,7 @@ export default function Header({ locale, services }: HeaderProps) {
                         <ChangeLanguage />
 
                         <Link href={`/${locale}/contact-us`} className="rounded-[12px] bg-primary px-4 py-3 text-custom14 font-[600] text-white transition-colors duration-300 hover:bg-secondary">
-                            تواصل معنا الآن
+                            {isArabic ? "تواصل معنا الآن" : "Contact Us"}
                         </Link>
                     </div>
 
@@ -179,20 +186,20 @@ export default function Header({ locale, services }: HeaderProps) {
 
                         <li>
                             <MobileLink href={`/${locale}`} onClick={closeMenu}>
-                                الرئيسية
+                                {isArabic ? "رئيسية" : "Home"}
                             </MobileLink>
                         </li>
 
                         <li>
                             <MobileLink href={`/${locale}/about-us`} onClick={closeMenu}>
-                                من نحن
+                                {isArabic ? "من نحن" : "About Us"}
                             </MobileLink>
                         </li>
 
                         {/* Mobile Services */}
                         <li>
                             <button type="button" onClick={() => setIsServicesOpen((prev) => !prev)} aria-expanded={isServicesOpen} className="flex w-full cursor-pointer items-center justify-between rounded-[12px] px-4 py-4 text-right transition-colors duration-300 hover:bg-primary/[0.06] hover:text-primary">
-                                <span>خدماتنا</span>
+                                <span>{isArabic ? " الخدمات" : " Services"}</span>
 
                                 <FaAngleDown size={14} className={`transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`} />
                             </button>
@@ -203,7 +210,7 @@ export default function Header({ locale, services }: HeaderProps) {
                                     <div className="mr-4 py-2">
 
                                         <MobileSubLink href={`/${locale}/services`} onClick={closeMenu}>
-                                            كل الخدمات
+                                            {isArabic ? "كل الخدمات" : "All Services"}
                                         </MobileSubLink>
 
                                         {services.map((service, index) => (
@@ -220,19 +227,19 @@ export default function Header({ locale, services }: HeaderProps) {
 
                         <li>
                             <MobileLink href={`/${locale}/projects`} onClick={closeMenu}>
-                                أعمالنا
+                                {isArabic ? "العملات" : "Projects"}
                             </MobileLink>
                         </li>
 
                         <li>
                             <MobileLink href={`/${locale}/faqs`} onClick={closeMenu}>
-                                الأسئلة الشائعة
+                                {isArabic ? "الأسئلة الشائعة" : "FAQs"}
                             </MobileLink>
                         </li>
 
                         <li>
                             <MobileLink href={`/${locale}/flooring-design`} onClick={closeMenu}>
-                                اطلب تصميم أرضيتك
+                                {isArabic ? "Order Area" : "Order Design"}
                             </MobileLink>
                         </li>
 
@@ -242,7 +249,7 @@ export default function Header({ locale, services }: HeaderProps) {
                 {/* SideNav Footer */}
                 <div className="border-t border-black/5 p-5">
                     <Link href={`/${locale}/contact-us`} onClick={closeMenu} className="flex w-full items-center justify-center rounded-[12px] bg-primary px-5 py-4 font-[700] text-white transition-colors duration-300 hover:bg-secondary">
-                        تواصل معنا الآن
+                        {isArabic ? "تواصل معنا" : "Contact Us"}
                     </Link>
                 </div>
 

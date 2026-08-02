@@ -61,7 +61,7 @@ export default function ServicesData({ locale }: ServicesDataProps) {
                     <div className="col-span-12 lg:col-span-9">
 
                         <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} variants={fadeUp} className="mb-[25px] text-[20px] font-[700] leading-[1.4] text-blackGrey md:mb-[24px] md:text-[28px] lg:text-[32px]">
-                            منهجية العمل
+                           {isArabic ? "منهجية العمل" :"Work Methodology"}
                         </motion.h2>
 
                         {/* Steps */}
@@ -170,19 +170,22 @@ export default function ServicesData({ locale }: ServicesDataProps) {
 
                             <div className="relative z-10">
                                 <span className="mb-[10px] block text-[12px] font-[500] text-white/90">
-                                    إبدأ مشروعك معنا
+                                   {isArabic ? "إبدأ المشروعك معنا" : "Start Your Project with Us"}
                                 </span>
 
                                 <h3 className="mb-[15px] text-[22px] font-[700] leading-[1.5] md:text-[24px]">
-                                    هل لديك فكرة لأرضيتك؟
+                                   
+                                    {isArabic ? " هل لديك فكرة لأرضيتك؟" : "Have You Got An Idea For An Image?"}
+
                                 </h3>
 
                                 <p className="mb-[22px] text-[13px] font-[400] leading-[1.9] text-white/90">
-                                    شاركنا نوع المكان أو تفاصيل المساحة وسنساعدك في اختيار التصميم المناسب ونقدم لك تصورًا أوليًا للتنفيذ بدون تعقيد.
+                                {isArabic ?  " شاركنا نوع المكان أو تفاصيل المساحة وسنساعدك في اختيار التصميم المناسب ونقدم لك تصورًا أوليًا للتنفيذ بدون تعقيد.":"Share the type of venue or details of the space with us, and we will help you select the right design and provide a straightforward preliminary concept for its implementation."}
+                                   
                                 </p>
 
-                                <Link href={`/${locale}/contact`} className="group/btn flex min-h-[46px] w-full items-center justify-center gap-[12px] rounded-[8px] bg-white px-[16px] text-[14px] font-[600] text-primary shadow-sm transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_10px_25px_rgba(0,0,0,0.14)]">
-                                    اطلب هذه الخدمة
+                                <Link href={`/${locale}/contact-us`} className="group/btn flex min-h-[46px] w-full items-center justify-center gap-[12px] rounded-[8px] bg-white px-[16px] text-[14px] font-[600] text-primary shadow-sm transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_10px_25px_rgba(0,0,0,0.14)]">
+                                    {isArabic ? "طلب هذه الخدمة" : "Order This Service"}
 
                                     <span className="transition-transform duration-300 group-hover/btn:-translate-x-[4px]" aria-hidden="true">
                                         ←

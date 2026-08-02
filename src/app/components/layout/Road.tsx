@@ -5,6 +5,8 @@ type RoadProps = {
 };
 
 export default function Road({ locale, title }: RoadProps) {
+    const isArabic = locale === "ar";
+
     return (
         <section
             className=" relative overflow-hidden py-[100px] md:py-[110px] lg:py-[120px] bg-[url('/images/bk-2.png')] bg-cover bg-center bg-no-repeat "
@@ -33,7 +35,7 @@ export default function Road({ locale, title }: RoadProps) {
                                     href={`/${locale}/`}
                                     className="transition-colors duration-200 hover:text-white"
                                 >
-                                    الرئيسية
+                                    {isArabic ? "الرئيسية" : "Home"}
                                 </a>
                             </li>
                             <li

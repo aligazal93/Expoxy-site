@@ -18,8 +18,8 @@ export default function BrandsSlider({ locale = "ar", clients = [] }: BrandsSlid
           <h2 id="trusted-clients-title" className="text-custom20 font-[700] leading-[1.5] text-grey">
             {isArabic ? (
               <>
-                عملاء
-                <span className="block">يثقون بنا</span>
+                {isArabic ? "عملاء" : "Clients"}
+                <span className="block"> {isArabic ? "يثقون بنا" : "trust us"}  </span>
               </>
             ) : (
               <>

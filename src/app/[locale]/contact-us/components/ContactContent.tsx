@@ -4,39 +4,88 @@ import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 
 import {
+    FaFacebookF,
     FaInstagram,
     FaSnapchat,
     FaTiktok,
     FaXTwitter,
-    FaFacebookF,
 } from "react-icons/fa6";
 
 import {
     LuMail,
     LuMapPin,
     LuPhone,
-    LuSend,
 } from "react-icons/lu";
+import { Information } from "@/app/types/home";
+import { toast } from "sonner";
+import axios from "axios";
+import { sendContactEmail } from "@/app/services/sendEmail";
 
-type ContactContentProps = {
+
+interface ContactContentProps {
     locale: string;
-};
+    informations?: Information;
+}
 
-export default function ContactContent({ locale }: ContactContentProps) {
+export default function ContactContent({ locale, informations }: ContactContentProps) {
     const isArabic = locale === "ar";
-
     const [loading, setLoading] = useState(false);
+
+    const phone = informations?.phone?.trim() || "";
+    const email = informations?.email?.trim() || "";
+    const address = informations?.address?.trim() || "";
+    const instagram = informations?.instagram?.trim() || "";
+    const facebook = informations?.facebook?.trim() || "";
+    const tiktok = informations?.tiktok?.trim() || "";
+    const snapchat = informations?.snapchat?.trim() || "";
+    const twitter = informations?.twitter?.trim() || "";
+
+    const phoneHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "#";
+    const mapUrl = address ? `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed` : "";
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+
+        const payload = {
+            name: String(formData.get("name") || "").trim(),
+            email: String(formData.get("email") || "").trim(),
+            phone: String(formData.get("phone") || "").trim(),
+            message: String(formData.get("message") || "").trim(),
+        };
+
+        if (!payload.name || !payload.email || !payload.phone || !payload.message) {
+            toast.error(isArabic ? "يرجى إدخال جميع البيانات المطلوبة" : "Please complete all required fields");
+            return;
+        }
+
         setLoading(true);
 
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-    };
+        try {
+            const response = await sendContactEmail(payload);
 
+            toast.success(response.message || (isArabic ? "تم إرسال رسالتك بنجاح" : "Your message has been sent successfully"));
+
+            form.reset();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const responseData = error.response?.data as {
+                    message?: string;
+                    errors?: Record<string, string[]>;
+                };
+
+                const validationMessage = responseData?.errors ? Object.values(responseData.errors).flat()[0] : undefined;
+
+                toast.error(validationMessage || responseData?.message || (isArabic ? "تعذر إرسال الرسالة، حاول مرة أخرى" : "Unable to send your message. Please try again"));
+            } else {
+                toast.error(isArabic ? "حدث خطأ غير متوقع" : "An unexpected error occurred");
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <section className="overflow-hidden bg-white py-[60px] md:py-[80px]" >
             <div className="container">
@@ -48,20 +97,22 @@ export default function ContactContent({ locale }: ContactContentProps) {
                     <motion.div initial={{ opacity: 0, x: isArabic ? 40 : -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="lg:pt-[15px]">
 
                         <span className="mb-[14px] block text-[14px] font-[600] text-primary">
-                            معلومات التواصل
+                            {isArabic ? "معلومات التواصل" : "Contact Us"}
                         </span>
 
                         <h1 className="mb-[20px] text-[32px] font-[700] leading-[1.4] text-blackGrey sm:text-[32px] lg:text-[40px]">
-                            يسعدنا التواصل معك
+
+                            {isArabic ? " يسعدنا التواصل معك" : "We are pleased to be in touch with you."}
                         </h1>
 
                         <p className="max-w-[600px] text-[14px] font-[400] leading-[2] text-greyColor sm:text-[15px]">
-                            سواء كنت تخطط لبدء مشروع جديد، أو تبحث عن استشارة متخصصة، أو لديك أي استفسار حول خدماتنا، فريقنا جاهز لمساعدتك في كل خطوة.
+                            {isArabic ? " سواء كنت تخطط لبدء مشروع جديد، أو تبحث عن استشارة متخصصة، أو لديك أي استفسار حول خدماتنا، فريقنا جاهز لمساعدتك في كل خطوة." : "Whether you are planning to start a new project, seeking expert advice, or have any inquiries about our services, our team is ready to assist you every step of the way."}
+
 
                         </p>
 
                         <p className="mt-[14px] max-w-[600px] text-[14px] font-[400] leading-[2] text-greyColor sm:text-[15px]">
-                            تواصل معنا، وسنحرص على الرد عليك في أقرب وقت وتقديم الحل المناسب الذي يتوافق مع احتياجات مشروعك.
+                            {isArabic ? " تواصل معنا، وسنحرص على الرد عليك في أقرب وقت وتقديم الحل المناسب الذي يتوافق مع احتياجات مشروعك." : "Contact us, and we will ensure a prompt response and provide the appropriate solution tailored to your project's needs."}
                         </p>
 
                         <div className="my-[20px] h-px w-full bg-borderColor" />
@@ -77,7 +128,7 @@ export default function ContactContent({ locale }: ContactContentProps) {
                                 </span>
 
                                 <strong className="text-[17px] font-[700] text-blackGrey transition-colors group-hover:text-primary" dir="ltr">
-                                    +966 50 000 0000
+                                    {phone}
                                 </strong>
                             </div>
                         </motion.a>
@@ -94,7 +145,7 @@ export default function ContactContent({ locale }: ContactContentProps) {
                                 </span>
 
                                 <strong className="text-[16px] font-[700] text-blackGrey transition-colors group-hover:text-primary" dir="ltr">
-                                    info@aloulaepoxy.com
+                                    {email}
                                 </strong>
                             </div>
                         </motion.a>
@@ -111,7 +162,7 @@ export default function ContactContent({ locale }: ContactContentProps) {
                                 </span>
 
                                 <strong className="text-[16px] font-[700] leading-[1.7] text-blackGrey">
-                                    {isArabic ? "الرياض، المملكة العربية السعودية" : "Riyadh, Saudi Arabia"}
+                                    {address}
                                 </strong>
                             </div>
                         </motion.div>
@@ -124,23 +175,23 @@ export default function ContactContent({ locale }: ContactContentProps) {
 
                             <div className="flex items-center gap-[10px]">
 
-                                <a href="#" aria-label="Instagram" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
+                                <a href={instagram} aria-label="Instagram" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
                                     <FaInstagram />
                                 </a>
 
-                                <a href="#" aria-label="TikTok" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
+                                <a href={tiktok} aria-label="TikTok" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
                                     <FaTiktok />
                                 </a>
 
-                                <a href="#" aria-label="Snapchat" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
+                                <a href={snapchat} aria-label="Snapchat" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
                                     <FaSnapchat />
                                 </a>
 
-                                <a href="#" aria-label="X" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
+                                <a href={twitter} aria-label="X" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
                                     <FaXTwitter />
                                 </a>
 
-                                <a href="#" aria-label="Facebook" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
+                                <a href={facebook} aria-label="Facebook" className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-borderColor text-[18px] text-primary transition-all duration-300 hover:-translate-y-[3px] hover:border-primary hover:bg-primary hover:text-white">
                                     <FaFacebookF />
                                 </a>
 
@@ -206,10 +257,9 @@ export default function ContactContent({ locale }: ContactContentProps) {
                             </div>
 
                             <motion.button type="submit" disabled={loading} whileTap={{ scale: 0.98 }} className="flex min-h-[50px] w-full items-center justify-center gap-[10px] rounded-[8px] bg-primary px-[20px] text-[14px] font-[600] text-white shadow-[0_10px_30px_rgba(22,95,174,0.18)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_15px_35px_rgba(22,95,174,0.25)] disabled:pointer-events-none disabled:opacity-60">
-                                {loading
-                                    ? "جاري الإرسال..."
-                                    : "إرسال"
-                                }
+                                {loading && <span className="h-[18px] w-[18px] animate-spin rounded-full border-2 border-white/40 border-t-white" />}
+
+                                {loading ? (isArabic ? "جاري الإرسال..." : "Sending...") : isArabic ? "إرسال الرسالة" : "Send Message"}
                             </motion.button>
 
                         </form>
@@ -221,7 +271,7 @@ export default function ContactContent({ locale }: ContactContentProps) {
                 {/* Map */}
                 <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="relative mt-[55px] h-[280px] w-full overflow-hidden rounded-[22px] border border-borderColor bg-[#F5F7F8] md:mt-[70px] md:h-[360px]">
 
-                    <iframe src="https://www.google.com/maps?q=Riyadh,Saudi%20Arabia&output=embed" title="موقع الأولى للإيبوكسي" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="absolute inset-0 h-full w-full border-0 grayscale-[0.35]" />
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3351.4867551081416!2d13.20140517546357!3d32.85883847362963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa6e92cb857709751%3A0xc55498846e70a9fd!2z2LTYsdmD2Kkg2KfZhNin2YjZhNmJINin2YTYrdiv2YrYq9ipINmE2YTYr9i52KfZitipINmI2KfZhNin2LnZhNin2YYg2KfZhNmF2K3Yr9mI2K_YqQ!5e0!3m2!1sen!2seg!4v1785685084533!5m2!1sen!2seg" title="موقع الأولى للإيبوكسي" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="absolute inset-0 h-full w-full border-0 grayscale-[0.35]" />
 
                 </motion.div>
 

@@ -29,11 +29,12 @@ export default function ProcessSection({
         {/* Heading */}
         <header className="mx-auto mb-[55px] max-w-[850px] text-center lg:mb-[75px]">
           <span className={`mb-5 inline-flex rounded-full ${isHome ? "border-white/50" : "border-[#70707070]"} px-4 py-[6px] border  px-4 py-[6px] text-[13px] font-medium ${isHome ? "text-white" : "text-[#70707070]"}`}>
-            كيف تعمل؟
+            {isArabic ? "كيف يعمل؟" : "How Does It Work?"}
           </span>
 
           <h2 id="process-title" className={`text-[28px] font-bold leading-[1.5] ${isHome ? "text-white" : "text-dark"} md:text-[36px] lg:text-[42px]`}>
-            من الفكرة إلى أرضية أحلامك في خطوات بسيطة
+
+            {isArabic ? "من الفكرة إلى أرضية أحلامك في خطوات بسيطة" : "From Idea to Real World in Simple Steps"}
           </h2>
         </header>
 
@@ -74,9 +75,10 @@ function ProcessStep({ step, index, isArabic }) {
           <div className="relative">
             <ProcessCard step={step} index={index} isArabic={isArabic} />
 
-            <div className="absolute left-[-50px] top-1/2 h-[2px] w-[50px] -translate-y-1/2 bg-[#0783ad]" />
+            {isArabic ? <div className="absolute left-[-50px] top-1/2 h-[2px] w-[50px] -translate-y-1/2 bg-[#0783ad]" /> : null}
 
-            <span className="absolute left-[-56px] top-1/2 z-20 h-[13px] w-[13px] -translate-y-1/2 rounded-full bg-[#05AEEF]" />
+            
+            {isArabic ? <span className="absolute left-[-56px] top-1/2 z-20 h-[13px] w-[13px] -translate-y-1/2 rounded-full bg-[#05AEEF]" /> : null}
           </div>
         )}
       </div>
@@ -90,9 +92,10 @@ function ProcessStep({ step, index, isArabic }) {
           <div className="relative">
             <ProcessCard step={step} index={index} isArabic={isArabic} />
 
-            <div className="absolute right-[-50px] top-1/2 h-[2px] w-[50px] -translate-y-1/2 bg-[#0783ad]" />
+            {isArabic ? <div className="absolute right-[-50px] top-1/2 h-[2px] w-[50px] -translate-y-1/2 bg-[#0783ad]" /> : null}
 
-            <span className="absolute right-[-56px] top-1/2 z-20 h-[13px] w-[13px] -translate-y-1/2 rounded-full bg-[#05AEEF]" />
+           
+            {isArabic ? <span className="absolute right-[-56px] top-1/2 z-20 h-[13px] w-[13px] -translate-y-1/2 rounded-full bg-[#05AEEF]" /> : null}
           </div>
         )}
       </div>
