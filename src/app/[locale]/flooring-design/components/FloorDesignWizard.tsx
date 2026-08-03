@@ -16,6 +16,9 @@ import StepCity from "../steps/StepCity";
 import StepContactInfo from "../steps/StepContactInfo";
 import StepReview from "../steps/StepReview";
 import { useHome } from "@/app/hooks/useHome";
+import { useCreateOrder } from "@/app/hooks/useCreateOrder";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface FloorDesignWizardProps {
     locale: string;
@@ -24,12 +27,15 @@ interface FloorDesignWizardProps {
 const TOTAL_STEPS = 7;
 
 export default function FloorDesignWizard({ locale }: FloorDesignWizardProps) {
+    const router = useRouter();
     const normalizedLocale = locale?.toLowerCase().split("-")[0];
     const isArabic = normalizedLocale === "ar";
     const { data: homeData } = useHome(locale);
 
     const sectionRef = useRef<HTMLElement | null>(null);
     const previewUrlRef = useRef("");
+    const { mutateAsync: submitOrder, isPending } = useCreateOrder();
+
 
     const { data: formOptions, isLoading, isError, refetch } = useFormData(locale);
 
@@ -42,11 +48,12 @@ export default function FloorDesignWizard({ locale }: FloorDesignWizardProps) {
         placeTypeId: null,
         placeType: "",
         area: "",
+        designId: null,
         designCode: "",
         designName: "",
         designImage: "",
         locationImage: null,
-        cityId: null,
+        areaId: null,
         city: "",
         name: "",
         phone: "",
@@ -87,6 +94,7 @@ export default function FloorDesignWizard({ locale }: FloorDesignWizardProps) {
     const selectDesign = (design: FormDesign) => {
         setFormData((previousData) => ({
             ...previousData,
+            designId: design.id,
             designCode: design.code,
             designName: design.name,
             designImage: design.image,
@@ -95,10 +103,14 @@ export default function FloorDesignWizard({ locale }: FloorDesignWizardProps) {
         setValidationError("");
     };
 
+    useEffect(() => {
+        console.log("Current wizard form data:", formData);
+    }, [formData]);
+
     const selectCity = (id: number, name: string) => {
         setFormData((previousData) => ({
             ...previousData,
-            cityId: id,
+            areaId: id,
             city: name,
         }));
 
@@ -118,7 +130,7 @@ export default function FloorDesignWizard({ locale }: FloorDesignWizardProps) {
             return isArabic ? "من فضلك اختر أحد التصاميم." : "Please choose a design.";
         }
 
-        if (currentStep === 5 && !formData.cityId) {
+        if (currentStep === 5 && !formData.areaId) {
             return isArabic ? "من فضلك اختر المدينة." : "Please choose a city.";
         }
 
@@ -336,6 +348,72 @@ Notes: ${formData.notes || "No notes"}
         );
     }
 
+
+   const handleSubmitOrder = async () => {
+        setValidationError("");
+
+        if (!formData.placeTypeId) {
+            setValidationError(isArabic ? "من فضلك اختر نوع المكان." : "Please choose a place type.");
+            return;
+        }
+
+        if (!formData.area || Number(formData.area) <= 0) {
+            setValidationError(isArabic ? "من فضلك أدخل مساحة صحيحة." : "Please enter a valid area.");
+            return;
+        }
+
+        if (!formData.designId) {
+            setValidationError(isArabic ? "من فضلك اختر التصميم." : "Please choose a design.");
+            return;
+        }
+
+        if (!formData.areaId) {
+            setValidationError(isArabic ? "من فضلك اختر المدينة." : "Please choose a city.");
+            return;
+        }
+
+        if (formData.name.trim().length < 3) {
+            setValidationError(isArabic ? "من فضلك أدخل الاسم بشكل صحيح." : "Please enter a valid name.");
+            return;
+        }
+
+        const phoneDigits = formData.phone.replace(/\D/g, "");
+
+        if (phoneDigits.length < 8) {
+            setValidationError(isArabic ? "من فضلك أدخل رقم جوال صحيح." : "Please enter a valid phone number.");
+            return;
+        }
+
+        try {
+            await submitOrder({
+                user_name: formData.name.trim(),
+                user_phone: formData.phone.trim(),
+                notes: formData.notes.trim(),
+                area: formData.area,
+                design_id: formData.designId,
+                area_id: formData.areaId,
+                place_type_id: formData.placeTypeId,
+                image: formData.locationImage,
+            });
+
+            toast.success(
+                isArabic
+                    ? "تم إرسال طلبك بنجاح، وسيتم التواصل معك قريبًا."
+                    : "Your request has been submitted successfully."
+            );
+
+            router.push(`/${locale}`);
+        } catch (error: unknown) {
+            console.error("Create order error:", error);
+
+            toast.error(
+                isArabic
+                    ? "تعذر إرسال الطلب، من فضلك حاول مرة أخرى."
+                    : "Unable to submit your request. Please try again."
+            );
+        }
+    };
+
     return (
         <section ref={sectionRef} dir={isArabic ? "rtl" : "ltr"} className="min-h-screen scroll-mt-[100px] bg-white py-[60px] md:py-[90px]">
             <div className="container">
@@ -384,9 +462,14 @@ Notes: ${formData.notes || "No notes"}
                                 {isArabic ? "التالي" : "Next"}
                             </button>
                         ) : (
-                            <button type="button" onClick={handleSendWhatsApp} className="flex h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[10px] bg-[#003B4D] px-5 text-custom14 font-[700] text-white transition-colors duration-200 hover:bg-[#002F3D] active:bg-[#002630] sm:w-[240px]">
-                                {isArabic ? "إرسال عبر الواتساب" : "Send via WhatsApp"}
-                                <FaWhatsapp size={21} />
+                            <button type="button" disabled={isPending} onClick={() => void handleSubmitOrder()} className="flex h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[10px] bg-[#0BA5EC] px-5 text-custom14 font-[700] text-white transition-colors duration-200 hover:bg-[#0796D7] active:bg-[#0788C2] disabled:cursor-not-allowed disabled:opacity-60 sm:w-[240px]">
+                                {isPending
+                                    ? isArabic
+                                        ? "جاري إرسال الطلب..."
+                                        : "Submitting..."
+                                    : isArabic
+                                        ? "إرسال الطلب"
+                                        : "Submit Request"}
                             </button>
                         )}
                     </div>

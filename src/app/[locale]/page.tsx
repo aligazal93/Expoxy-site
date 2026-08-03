@@ -9,55 +9,13 @@ import { getHomeData } from "../services/home";
 import WhyEpoxyHome from "@/components/home/WhyEpoxy";
 import DesignGallerySection from "../components/DesignGallerySection";
 
-const projects = [
-  {
-    id: 1,
-    title: "مشروع فيلا سكنية",
-    slug: "residential-villa",
-    category: "أرضيات إيبوكسي ثلاثية الأبعاد",
-    image: "/images/proj-2.png",
-    alt: "أرضية إيبوكسي ثلاثية الأبعاد داخل فيلا سكنية",
-  },
-  {
-    id: 2,
-    title: "مشروع شقة عصرية",
-    slug: "modern-apartment",
-    category: "أرضيات إيبوكسي ثلاثية الأبعاد",
-    image: "/images/proj-2.png",
-    alt: "أرضية إيبوكسي رخامية بعروق ذهبية داخل شقة عصرية",
-  },
-  {
-    id: 3,
-    title: "مشروع مكتب تنفيذي",
-    slug: "executive-office",
-    category: "أرضيات إيبوكسي ثلاثية الأبعاد",
-    image: "/images/proj-3.png",
-    alt: "أرضيات إيبوكسي حديثة داخل مكتب تنفيذي",
-  },
-  {
-    id: 4,
-    title: "مشروع معرض تجاري",
-    slug: "commercial-showroom",
-    category: "أرضيات إيبوكسي تجارية",
-    image: "/images/proj-2.png",
-    alt: "تنفيذ أرضيات إيبوكسي لمعرض تجاري",
-  },
-  {
-    id: 5,
-    title: "مشروع فيلا خاصة",
-    slug: "private-villa",
-    category: "أرضيات إيبوكسي فاخرة",
-    image: "/images/pic-1.png",
-    alt: "تصميم أرضيات إيبوكسي فاخرة داخل فيلا خاصة",
-  },
-];
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const data = await getHomeData(locale);
   return (
     <>
-      <Intro locale={locale} />
+      <Intro locale={locale} slide={data?.slide} />
       <BrandsSlider locale={locale} clients={data?.clients || []} />
       <WhyEpoxy locale={locale} />
       <Services services={data?.services || []} locale={locale} />

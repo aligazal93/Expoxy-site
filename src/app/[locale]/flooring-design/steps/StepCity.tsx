@@ -14,7 +14,7 @@ export default function StepCity({ formData, areas, selectCity }: StepCityProps)
             {areas.length > 0 ? (
                 <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
                     {areas.map((area) => (
-                        <ChoiceButton key={area.id} active={formData.cityId === area.id} label={area.name} onClick={() => selectCity(area.id, area.name)} />
+                        <ChoiceButton key={area.id} active={formData.areaId === area.id} label={area.name} onClick={() => selectCity(area.id, area.name)} />
                     ))}
                 </div>
             ) : (

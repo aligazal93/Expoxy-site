@@ -70,3 +70,12 @@ export function useCategories(locale: string) {
     select: (data) => data.categories,
   });
 }
+
+
+export function useSlide(locale: string) {
+  return useQuery({
+    queryKey: homeKeys.detail(locale),
+    queryFn: () => getHomeData(locale),
+    select: (data) => data.slide,
+  });
+}

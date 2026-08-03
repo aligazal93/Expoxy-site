@@ -33,8 +33,8 @@ export default async function ServiceDetailsPage({ params }: PageProps) {
     return (
         <>
             <Road title="أرضيات إيبوكسي ثلاثية الأبعاد" locale={locale} />
-            <ServiceInfo locale={locale} />
-            <ServicesData locale={locale} />
+            <ServiceInfo locale={locale} id={id} />
+            <ServicesData locale={locale} id={id} />
             
         </>
 

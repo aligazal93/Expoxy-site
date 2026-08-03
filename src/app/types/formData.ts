@@ -4,11 +4,15 @@ export interface DesignCategory {
 }
 
 export interface FormDesign {
+    id: number;
     code: string;
     name: string;
     subtitle: string;
     image: string;
-    category: DesignCategory;
+    category: {
+        id: number;
+        title: string;
+    };
 }
 
 export interface FormArea {

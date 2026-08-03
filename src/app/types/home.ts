@@ -39,6 +39,12 @@ export interface Design {
   category: Category;
 }
 
+export interface Slide {
+  head_title: string;
+  title: string;
+  content: string;
+  image: string;
+}
 
 export interface Information {
   logo?: string;
@@ -63,4 +69,5 @@ export type HomeResponse = {
   informations: Information;
   categories: Category[];
   designs: Design[];
+  slide: Slide;
 };
