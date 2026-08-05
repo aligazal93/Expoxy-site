@@ -5,6 +5,14 @@ export type Service = {
   image: string;
 };
 
+export interface HomeSection {
+  title: string;
+  subtitle: string;
+  content: string;
+  images: string[];
+}
+
+
 export type Project = {
   id: number;
   name: string;
@@ -61,6 +69,7 @@ export interface Information {
 }
 
 export type HomeResponse = {
+  home_section: HomeSection;
   services: Service[];
   projects: Project[];
   steps: Step[];

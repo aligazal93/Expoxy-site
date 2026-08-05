@@ -6,7 +6,6 @@ import ProjectsSlider from "../components/ProjectsSlider";
 import ProcessSection from "../components/ProcessSection";
 import FaqSection from "../components/Faqs";
 import { getHomeData } from "../services/home";
-import WhyEpoxyHome from "@/components/home/WhyEpoxy";
 import DesignGallerySection from "../components/DesignGallerySection";
 
 
@@ -17,7 +16,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <Intro locale={locale} slide={data?.slide} />
       <BrandsSlider locale={locale} clients={data?.clients || []} />
-      <WhyEpoxy locale={locale} />
+       <WhyEpoxy locale={locale} homeSection={data.home_section} />
       <Services services={data?.services || []} locale={locale} />
       <ProjectsSlider
         projects={data?.projects || []}

@@ -34,7 +34,7 @@ export default function Footer({ locale, info }: FooterProps) {
 
     const whatsappNumber = info?.whatsapp?.replace(/\D/g, "") ?? "";
     const phoneNumber = info?.phone?.replace(/[^\d+]/g, "") ?? "";
-  const isArabic = locale === "ar";
+    const isArabic = locale === "ar";
 
 
     return (
@@ -45,11 +45,11 @@ export default function Footer({ locale, info }: FooterProps) {
                 <div className="container relative">
                     <div className="absolute left-1/2 top-0 z-10 w-[calc(100%-30px)] max-w-[1080px] -translate-x-1/2 -translate-y-1/2 rounded-[24px] bg-[#09A9E8] px-5 py-8 text-center shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:px-8 md:py-10 lg:px-12 lg:py-9">
                         <h2 className="mb-3 text-[24px] font-bold leading-[1.5] text-white md:text-[32px] lg:text-[36px]">
-                           {isArabic ? "جاهز لتحويل أرضيتك إلى قطعة فنية؟" : "Are You Ready to Convert Your Design to a Physical Product?"}
+                            {isArabic ? "جاهز لتحويل أرضيتك إلى قطعة فنية؟" : "Are You Ready to Convert Your Design to a Physical Product?"}
                         </h2>
 
                         <p className="mx-auto mb-6 max-w-[720px] text-[13px] leading-[2] text-white/80 md:text-[14px]">
-                           {isArabic ? "أرسل صورة مساحتك الآن، وسنساعدك في اختيار التصميم المناسب وتجهيز تصور مبدئي يناسب ذوقك ومكانك." : "Send a photo of your design to help you choose the right design and to prepare it for you."}
+                            {isArabic ? "أرسل صورة مساحتك الآن، وسنساعدك في اختيار التصميم المناسب وتجهيز تصور مبدئي يناسب ذوقك ومكانك." : "Send a photo of your design to help you choose the right design and to prepare it for you."}
                         </p>
 
                         <div className="flex flex-wrap items-center justify-center gap-3">
@@ -72,11 +72,11 @@ export default function Footer({ locale, info }: FooterProps) {
                 <div className="pt-12 block  lg:flex items-center justify-between">
                     <div className="text-start">
                         <h2 className="mb-2  text-[24px] font-bold leading-[1.5] text-white md:text-[32px] lg:text-[30px]">
-                           {isArabic ? "جاهز لتحويل أرضيتك إلى قطعة فنية؟" : "Are You Ready to Convert Your Design to a Physical Product?"}
+                            {isArabic ? "جاهز لتحويل أرضيتك إلى قطعة فنية؟" : "Are You Ready to Convert Your Design to a Physical Product?"}
                         </h2>
 
                         <p className="mx-auto mb-6 max-w-[720px] text-start text-[13px] leading-[2] text-white/80 md:text-[14px]">
-                           {isArabic ? "أرسل صورة مساحتك الآن، وسنساعدك في اختيار التصميم المناسب وتجهيز تصور مبدئي يناسب ذوقك ومكانك." : "Send a photo of your design to help you choose the right design and to prepare it for you."}
+                            {isArabic ? "أرسل صورة مساحتك الآن، وسنساعدك في اختيار التصميم المناسب وتجهيز تصور مبدئي يناسب ذوقك ومكانك." : "Send a photo of your design to help you choose the right design and to prepare it for you."}
                         </p>
                     </div>
                     <div>
@@ -84,12 +84,12 @@ export default function Footer({ locale, info }: FooterProps) {
                             <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="group  inline-flex min-h-[44px] items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
                                 {isArabic ? "تواصل عبر واتساب" : "Whatsapp Now"}
 
-                                {isArabic ? <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />  : <FaArrowRightLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />}
+                                {isArabic ? <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" /> : <FaArrowRightLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />}
                             </a>
                             <Link href={`/${locale}/flooring-design`} className="group inline-flex min-h-[44px] items-center justify-center mx-2 gap-3 rounded-full border border-white/20 bg-white/5 px-6 text-[13px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-[#05AEEF]">
                                 {isArabic ? "طلب تصميم أرضيتك" : "Request Design"}
-                                {isArabic ? <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />  : <FaArrowRightLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />}
-                                
+                                {isArabic ? <FaArrowLeftLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" /> : <FaArrowRightLong className="text-[13px] transition-transform duration-300 group-hover:-translate-x-1" />}
+
                             </Link>
                         </div>
                     </div>
@@ -105,8 +105,8 @@ export default function Footer({ locale, info }: FooterProps) {
                     {/* About */}
                     <div>
                         <h2 className="mb-5 text-custom20 font-bold text-[#13AEEB]">
-                            {isArabic ? " الأولى للإيبوكسي"  :  "Aloula Epoxy"}
-                           
+                            {isArabic ? " الأولى للإيبوكسي" : "Aloula Epoxy"}
+
                         </h2>
 
                         <p className="max-w-[320px] text-[14px] leading-[2] text-white">
@@ -149,14 +149,14 @@ export default function Footer({ locale, info }: FooterProps) {
                     {/* Main Links */}
                     <nav aria-label="الصفحات الرئيسية">
                         <h2 className="mb-5 text-custom20 font-bold text-[#13AEEB]">
-                            {isArabic ? "صفحات الرئيسية"  :  "Main Pages"}
-                           
+                            {isArabic ? "صفحات الرئيسية" : "Main Pages"}
+
                         </h2>
 
                         <ul className="space-y-3">
                             <li>
                                 <Link href={`${locale}/`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
-                                    {isArabic ? "رئيسية" : "Home"}
+                                    {isArabic ? "الرئيسيه" : "Home"}
                                 </Link>
                             </li>
                             <li>
@@ -166,12 +166,12 @@ export default function Footer({ locale, info }: FooterProps) {
                             </li>
                             <li>
                                 <Link href={`${locale}/projects`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
-                                    {isArabic ? "مشاريعنا" : "Projects"}
+                                    {isArabic ? "مشاريعنا" : "Our Projects"}
                                 </Link>
                             </li>
                             <li>
                                 <Link href={`${locale}/services`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
-                                    {isArabic ? "خدمنا" : "Services"}
+                                    {isArabic ? "خدماتنا" : " Our Services"}
                                 </Link>
                             </li>
                             <li>
@@ -186,19 +186,19 @@ export default function Footer({ locale, info }: FooterProps) {
                     {/* Important Links */}
                     <nav aria-label="روابط مهمة">
                         <h2 className="mb-5 text-[15px] font-bold text-[#13AEEB]">
-                            {isArabic ? "روابط مهمه"  :  "Important Links"}
-                           
+                            {isArabic ? "روابط مهمه" : "Important Links"}
+
                         </h2>
 
                         <ul className="space-y-3">
                             <li>
-                                <Link href={`${locale}/`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
-                                    {isArabic ? " سياسة الخصوصية" : "Privacy Policy"}
+                                <Link href={`/${locale}/terms-and-conditions`} className="transition-colors hover:text-primary">
+                                    {locale === "ar" ? "الشروط والأحكام" : "Terms and Conditions"}
                                 </Link>
                             </li>
                             <li>
-                                <Link href={`${locale}/`} className="inline-block text-custom14 text-white transition-colors duration-300 hover:text-[#13AEEB]">
-                                    {isArabic ? " الشروط و الاحكام" : "Terms and Conditions"}
+                                <Link href={`/${locale}/privacy-policy`} className="transition-colors hover:text-primary">
+                                    {locale === "ar" ? "سياسة الخصوصية" : "Privacy Policy"}
                                 </Link>
                             </li>
                         </ul>
@@ -208,7 +208,7 @@ export default function Footer({ locale, info }: FooterProps) {
                     <div>
                         <h2 className="mb-5 text-[15px] font-bold text-[#13AEEB]">
                             {isArabic ? "تواصل معنا" : "Contact Us"}
-                            
+
                         </h2>
 
                         <address className="space-y-5 not-italic">

@@ -23,7 +23,7 @@ export default function Road({ locale, title }: RoadProps) {
                         id="works-hero-title"
                         className="text-[30px] text-center font-[700] leading-none text-white md:text-[40px] lg:text-[42px] xl:text-[48px]"
                     >
-                        {title}
+                        {title }
                     </h2>
 
                     <nav

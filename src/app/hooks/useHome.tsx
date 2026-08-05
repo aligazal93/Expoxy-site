@@ -38,6 +38,16 @@ export function useSteps(locale: string) {
   });
 }
 
+export function useHomeSection(locale: string) {
+  return useQuery({
+    queryKey: homeKeys.detail(locale),
+    queryFn: () => getHomeData(locale),
+    select: (data) => data.home_section,
+  });
+}
+
+
+
 export function useQuestions(locale: string) {
   return useQuery({
     queryKey: homeKeys.detail(locale),
