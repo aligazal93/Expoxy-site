@@ -92,52 +92,68 @@ html, body {
     transform: translateX(-50%);
   }
 }
+
 .clients-track {
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: clients-marquee 20s linear infinite;
-}
-
-.clients-track-reverse {
-  animation-direction: reverse;
 }
 
 .clients-group {
   display: flex;
+  width: max-content;
   flex-shrink: 0;
   align-items: center;
-  gap: 40px;
-  padding-right: 40px;
+  gap: 24px;
+  padding-inline-end: 24px;
+}
+
+.clients-track-rtl {
+  animation: clients-marquee-rtl 25s linear infinite;
+}
+
+.clients-track-ltr {
+  animation: clients-marquee-ltr 25s linear infinite;
 }
 
 .clients-track:hover {
   animation-play-state: paused;
 }
 
-@keyframes clients-marquee {
+@keyframes clients-marquee-rtl {
   from {
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 
   to {
-    transform: translate3d(-50%, 0, 0);
+    transform: translateX(50%);
+  }
+}
+
+@keyframes clients-marquee-ltr {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
   }
 }
 
 @media (max-width: 767px) {
-  .clients-track {
-    animation-duration: 14s;
+  .clients-group {
+    gap: 12px;
+    padding-inline-end: 12px;
   }
 
-  .clients-group {
-    gap: 24px;
-    padding-right: 24px;
+  .clients-track-rtl,
+  .clients-track-ltr {
+    animation-duration: 18s;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .clients-track {
-    animation-play-state: paused;
+    animation: none;
   }
 }

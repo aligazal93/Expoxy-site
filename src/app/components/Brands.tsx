@@ -6,20 +6,25 @@ interface BrandsSliderProps {
   clients?: Client[];
 }
 
+interface ClientsGroupProps {
+  clients: Client[];
+  hidden?: boolean;
+}
+
 export default function BrandsSlider({ locale = "ar", clients = [] }: BrandsSliderProps) {
   const isArabic = locale === "ar";
 
-  if (clients.length === 0) return null;
+  if (!clients.length) return null;
 
   return (
-    <section dir={locale} className="overflow-hidden border-b border-black/[0.05] bg-white py-7" aria-labelledby="trusted-clients-title">
+    <section  className="overflow-hidden border-b border-black/[0.05] bg-white py-7" aria-labelledby="trusted-clients-title">
       <div className="container flex items-center gap-6 lg:gap-[60px]">
         <div className="w-[100px] shrink-0 text-start lg:w-[120px]">
           <h2 id="trusted-clients-title" className="text-custom20 font-[700] leading-[1.5] text-grey">
             {isArabic ? (
               <>
-                {isArabic ? "عملاء" : "Clients"}
-                <span className="block"> {isArabic ? "يثقون بنا" : "trust us"}  </span>
+                عملاء
+                <span className="block">يثقون بنا</span>
               </>
             ) : (
               <>
@@ -30,8 +35,8 @@ export default function BrandsSlider({ locale = "ar", clients = [] }: BrandsSlid
           </h2>
         </div>
 
-        <div dir={locale} className="min-w-0 flex-1 overflow-hidden">
-          <div className={`clients-track ${isArabic ? "" : "clients-track-reverse"}`}>
+        <div className="min-w-0 flex-1 overflow-hidden">
+          <div className={`clients-track ${isArabic ? "clients-track-rtl" : "clients-track-ltr"}`}>
             <ClientsGroup clients={clients} />
             <ClientsGroup clients={clients} hidden />
           </div>
@@ -41,12 +46,12 @@ export default function BrandsSlider({ locale = "ar", clients = [] }: BrandsSlid
   );
 }
 
-function ClientsGroup({ clients, hidden = false }: { clients: Client[]; hidden?: boolean }) {
+function ClientsGroup({ clients, hidden = false }: ClientsGroupProps) {
   return (
     <div className="clients-group" aria-hidden={hidden}>
       {clients.map((client, index) => (
-        <div key={index} className="flex h-[55px] w-[130px] shrink-0 items-center justify-center lg:w-[150px]">
-          <Image src={client.logo} alt={"Client logo"} width={150} height={55} loading="lazy" className="h-auto max-h-[55px] w-auto max-w-[150px] object-contain transition duration-300" />
+        <div key={`${client.logo}-${index}`} className="flex h-[60px] w-[130px] shrink-0 items-center justify-center px-3 lg:w-[160px]">
+          <Image src={client.logo} alt={hidden ? "" : `Client logo ${index + 1}`} width={160} height={60} sizes="160px" loading="lazy" className="h-auto max-h-[55px] w-auto max-w-full object-contain transition-transform duration-300 hover:scale-105" />
         </div>
       ))}
     </div>
