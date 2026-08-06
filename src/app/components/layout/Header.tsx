@@ -227,7 +227,7 @@ export default function Header({ locale, services, info }: HeaderProps) {
 
                         <li>
                             <MobileLink href={`/${locale}/projects`} onClick={closeMenu}>
-                                {isArabic ? "العملات" : "Projects"}
+                                {isArabic ? "أعمالنا" : "Projects"}
                             </MobileLink>
                         </li>
 
@@ -239,7 +239,7 @@ export default function Header({ locale, services, info }: HeaderProps) {
 
                         <li>
                             <MobileLink href={`/${locale}/flooring-design`} onClick={closeMenu}>
-                                {isArabic ? "Order Area" : "Order Design"}
+                                {isArabic ? "أطلب تصميم أرضيتك" : " Order Flooring Design"}
                             </MobileLink>
                         </li>
 
